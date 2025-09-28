@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Snow blowers near me &mdash; Top picks, local rental &amp; repair</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="In-stock snow blower picks with quick compare, and a simple form to find local rental/repair. Mobile-first, fast, and trustworthy.">
+  <link rel="canonical" href="https://snowblowernearme.com/">
+  <link rel="preload" as="image" href="/assets/hero.webp" imagesrcset="/assets/hero.webp 1x">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <meta property="og:title" content="Snow blowers near me &mdash; Top picks">
+  <meta property="og:description" content="Compare top picks and find local rental/repair.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://snowblowernearme.com/">
+  <meta property="og:image" content="https://snowblowernearme.com/assets/logo.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script>
+  // Simple geo note (city only if permission granted). No tracking here.
+  async function geonote() {
+    if (!('geolocation' in navigator)) return;
+    try {
+      var p = await new Promise(function(res, rej){
+        navigator.geolocation.getCurrentPosition(res, rej, {maximumAge:600000, timeout:3000});
+      });
+      var lat = p.coords.latitude.toFixed(3);
+      var lon = p.coords.longitude.toFixed(3);
+      document.querySelectorAll('[data-city]').forEach(function(el){
+        el.textContent = 'your area (' + lat + ', ' + lon + ')';
+      });
+    } catch (e) {}
+  }
+  document.addEventListener('DOMContentLoaded', geonote);
+  // Outbound affiliate / lead click events (works with GA4 if added later)
+  function trackClick(label){
+    try{ console.log('event:outbound',label); }catch(e){}
+  }
+  </script>
+  <!-- Cloudflare Web Analytics can be enabled automatically for proxied zones in dashboard; script not required. -->
+</head>
+<body>
+<header class="site">
+  <a class="logo" href="/"><img src="/assets/logo.svg" alt="SnowBlowerNearMe logo" width="32" height="32"> <span>snowblowernearme<span class="dot">.</span>com</span></a>
+  <nav class="sticky-cta">
+    <a class="btn buy" href="#top-picks">Buy now</a>
+    <a class="btn lead" href="#local-services">Get local help</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <h1>Snow blowers in <span data-city>your city</span>: In-stock picks &amp; local options</h1>
+    <p class="sub">Fast compare of the best single- &amp; two-stage models, plus a quick form to find rental/repair near you.</p>
+    <div class="hero-actions">
+      <a class="btn buy" href="#top-picks">See Top Picks</a>
+      <a class="btn lead" href="#local-services">Find Local Help</a>
+    </div>
+  </div>
+</section>
+
+<section id="top-picks" class="cards">
+  <h2>Today's Top 3 Picks</h2>
+  <ul class="card-grid" aria-label="Top snow blowers">
+    <li class="card">
+      <h3>Two-stage 28" Gas &mdash; Heavy Snow</h3>
+      <ul class="specs"><li>Stage: 2-stage</li><li>Width: 28"</li><li>Power: Gas</li></ul>
+      <p class="pros">Pros: throws far, handles drifts; Cons: louder, maintenance</p>
+      <a class="btn buy" rel="nofollow sponsored" onclick="trackClick('Pick1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
+    </li>
+    <li class="card">
+      <h3>Cordless 21" &mdash; Driveway &amp; walkway</h3>
+      <ul class="specs"><li>Stage: 1-stage</li><li>Width: 21"</li><li>Power: Battery</li></ul>
+      <p class="pros">Pros: low upkeep, quick start; Cons: run-time in heavy wet snow</p>
+      <a class="btn buy" rel="nofollow sponsored" onclick="trackClick('Pick2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
+    </li>
+    <li class="card">
+      <h3>Single-stage 21" Gas &mdash; Budget workhorse</h3>
+      <ul class="specs"><li>Stage: 1-stage</li><li>Width: 21"</li><li>Power: Gas</li></ul>
+      <p class="pros">Pros: affordable, agile; Cons: struggles with deep drifts</p>
+      <a class="btn buy" rel="nofollow sponsored" onclick="trackClick('Pick3')" href="https://www.amazon.com/s?k=single+stage+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
+    </li>
+  </ul>
+</section>
+
+<section class="compare">
+  <h2>Quick Compare</h2>
+  <div class="table-wrap" role="region" aria-label="Comparison table">
+    <table>
+      <thead><tr><th>Model Type</th><th>Width</th><th>Power</th><th>Best for</th><th>Buy</th></tr></thead>
+      <tbody>
+        <tr><td>2-stage</td><td>28"</td><td>Gas</td><td>Heavy snow, long driveways</td>
+          <td><a class="btn buy small" rel="nofollow sponsored" onclick="trackClick('Table1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
+        <tr><td>1-stage</td><td>21"</td><td>Battery</td><td>Urban, quick clears</td>
+          <td><a class="btn buy small" rel="nofollow sponsored" onclick="trackClick('Table2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
+        <tr><td>1-stage</td><td>21"</td><td>Gas</td><td>Budget, medium snowfall</td>
+          <td><a class="btn buy small" rel="nofollow sponsored" onclick="trackClick('Table3')" href="https://www.amazon.com/s?k=single+stage+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="local-services" class="lead">
+  <h2>Find local rental or repair</h2>
+  <p>Need a rental today or fast repair? Tell us your city and we will email options.</p>
+  <p><a class="btn lead" href="https://forms.gle/JywyQHGHJyi4xPUR7">Open the quick request form</a></p>
+  <p class="alt">Or email: <a href="mailto:snownearme@gmail.com">snownearme@gmail.com</a></p>
+</section>
+
+<section class="weather">
+  <h2>Check the weather</h2>
+  <ul>
+    <li><a href="https://weather.gc.ca/" rel="noopener">Environment Canada forecast</a></li>
+    <li><a href="https://www.weather.gov/" rel="noopener">NOAA / National Weather Service</a></li>
+  </ul>
+</section>
+
+<section class="faq">
+  <h2>FAQ</h2>
+  <details><summary>Single- vs two-stage?</summary><p>Two-stage units handle deep drifts and end-of-driveway berms better; single-stage suits lighter snow and smaller areas.</p></details>
+  <details><summary>Electric vs gas?</summary><p>Electric (battery) starts instantly and needs less maintenance; gas wins on run-time and peak power for heavy or wet snow.</p></details>
+  <details><summary>Shipping speed?</summary><p>Varies by retailer and region; many offer two to five day windows early in season, longer during storms. Order ahead when snow is forecast.</p></details>
+</section>
+</main>
+
+<footer class="site">
+  <p><strong>Affiliate disclosure:</strong> We may earn commissions from qualifying purchases. Recommendations are independent and based on utility and availability.</p>
+  <nav class="footer">
+    <a href="/privacy.html">Privacy</a> &bull; <a href="/terms.html">Terms</a> &bull; <a href="/sitemap.xml">Sitemap</a>
+  </nav>
+</footer>
+
+<!-- JSON-LD: WebSite + SearchAction, ItemList (Top 3), Breadcrumb, FAQPage -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "name":"SnowBlowerNearMe",
+      "url":"https://snowblowernearme.com/",
+      "potentialAction":{
+        "@type":"SearchAction",
+        "target":"https://snowblowernearme.com/locations/{search_term_string}.html",
+        "query-input":"required name=search_term_string"
+      }
+    },
+    {
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://snowblowernearme.com/"}
+      ]
+    },
+    {
+      "@type":"ItemList",
+      "name":"Top Snow Blower Picks",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Two-stage 28\" Gas"}},
+        {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Cordless 21\""}},
+        {"@type":"ListItem","position":3,"item":{"@type":"Product","name":"Single-stage 21\" Gas"}}
+      ]
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"Single- vs two-stage?","acceptedAnswer":{"@type":"Answer","text":"Two-stage units handle deep drifts better; single-stage suits lighter snow and smaller areas."}},
+        {"@type":"Question","name":"Electric vs gas?","acceptedAnswer":{"@type":"Answer","text":"Electric starts instantly and is low-maintenance; gas wins on run-time and power for heavy or wet snow."}},
+        {"@type":"Question","name":"Shipping speed?","acceptedAnswer":{"@type":"Answer","text":"Varies by retailer and region; order ahead when snow is forecast."}}
+      ]
+    }
+  ]
+}
+</script>
+<script>
+(function(){
+  var affiliateTag = 'snowme-20';
+  function applyTag(anchor){
+    var href = anchor.getAttribute('href');
+    if (!href || href.indexOf('amazon.') === -1) return;
+    try{
+      var url = new URL(href, window.location.href);
+      if (url.searchParams.get('tag') !== affiliateTag){
+        url.searchParams.set('tag', affiliateTag);
+      }
+      anchor.href = url.toString();
+    }catch(err){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('a[href]').forEach(applyTag);
+  });
+})();
+</script>
+</body>
+</html>

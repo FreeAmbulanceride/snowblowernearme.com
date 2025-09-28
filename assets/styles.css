@@ -1,0 +1,39 @@
+:root{
+  --bg:#0A1B2E; --surface:#0F243A; --text:#FFFFFF; --muted:#C8D2E0;
+  --cta:#B45309; --ctaText:#FFFFFF; --lead:#0EA5E9; --ok:#10B981; --danger:#DC2626;
+  --maxw:1100px;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+a{color:#93C5FD}a:focus{outline:2px solid #93C5FD;outline-offset:2px}
+.site{max-width:var(--maxw);margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-weight:700}
+.logo .dot{color:#60A5FA}
+.sticky-cta{display:flex;gap:8px}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+.btn.buy{background:var(--cta);color:var(--ctaText)}
+.btn.lead{background:#0F766E;color:#fff}
+.btn.small{padding:6px 10px;border-radius:8px}
+.hero{background:linear-gradient(180deg, rgba(9,21,37,1) 0%, rgba(13,34,58,1) 100%);padding:28px 16px}
+.hero-copy{max-width:var(--maxw);margin:0 auto}
+.hero h1{font-size:1.4rem;margin:0 0 8px}
+.hero .sub{color:var(--muted);margin:0 0 16px}
+.hero-actions .btn{margin-right:8px}
+.cards,.compare,.lead,.weather,.faq{max-width:var(--maxw);margin:16px auto;padding:0 16px}
+.cards h2,.compare h2,.lead h2,.weather h2,.faq h2{font-size:1.2rem;margin:0 0 12px}
+.card-grid{display:grid;grid-template-columns:1fr;gap:12px;list-style:none;padding:0;margin:0}
+.card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:14px}
+.card h3{margin:0 0 6px;font-size:1rem}
+.specs{display:flex;gap:10px;list-style:none;padding:0;margin:0 0 8px;color:var(--muted)}
+.pros{margin:0 0 10px}
+.table-wrap{overflow-x:auto;background:var(--surface);border-radius:12px;border:1px solid rgba(255,255,255,0.05)}
+table{width:100%;border-collapse:separate;border-spacing:0}
+th,td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left}
+th{color:var(--muted);font-weight:600}
+.lead p{margin:8px 0}
+.footer a{color:#93C5FD}
+footer.site{flex-direction:column;gap:8px;margin-bottom:24px}
+@media (min-width:700px){
+  .card-grid{grid-template-columns:repeat(3,1fr)}
+  .hero h1{font-size:2rem}
+}
