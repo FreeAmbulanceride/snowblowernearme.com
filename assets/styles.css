@@ -19,7 +19,8 @@ a{color:#93C5FD}a:focus{outline:2px solid #93C5FD;outline-offset:2px}
 .hero h1{font-size:1.4rem;margin:0 0 8px}
 .hero .sub{color:var(--muted);margin:0 0 16px}
 .hero-actions{display:flex;gap:8px;flex-wrap:wrap}
-.hero-actions .btn{margin-right:0}
+.hero-actions .btn{margin-right:0;flex:1 1 150px;text-align:center}
+@media (min-width:480px){.hero-actions .btn{flex:0 0 auto}}
 .cards,.compare,.lead,.weather,.faq{max-width:var(--maxw);margin:16px auto;padding:0 16px}
 .sticky-cta .btn{flex:1 1 140px;text-align:center}
 @media (min-width:480px){.sticky-cta .btn{flex:0 0 auto}}
