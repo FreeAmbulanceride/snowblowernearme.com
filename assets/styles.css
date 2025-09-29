@@ -77,3 +77,36 @@ tbody tr:last-child td{border-bottom:0}
 footer.site{border-top:1px solid rgba(255,255,255,.06);padding:16px 0;margin-top:28px}
 footer .links{display:flex;gap:12px;flex-wrap:wrap}
 .small{font-size:.92rem;color:var(--muted)}
+
+/* --- Hotfix: kill legacy overlay text in thumbnails --- */
+.thumb h4 { display:none !important; }
+
+/* Make every product card uniform and stop overlaps */
+.card { position:relative; display:flex; flex-direction:column; gap:12px; }
+
+/* Solid thumbnail box with safe sizing */
+.thumb{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/10;
+  border-radius:10px;
+  overflow:hidden;
+  background:linear-gradient(180deg,#1c2c48 0%, #b27b34 100%);
+}
+/* Fallback if a browser ignores aspect-ratio */
+@supports not (aspect-ratio: 1 / 1) {
+  .thumb::before{content:"";display:block;padding-top:62.5%;}
+}
+
+/* Tighter, readable product title */
+.card h3{ margin:4px 0 6px; font-size:1.1rem; line-height:1.28; }
+
+/* Specs wrap nicely on small screens */
+.specs{ display:flex; flex-wrap:wrap; gap:12px; list-style:none; margin:0; padding:0; color:var(--muted); }
+
+/* Keep CTA from stretching oddly */
+.card .btn{ align-self:flex-start; }
+
+/* Fix grid spacing so cards never spill into the compare section */
+.card-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+@media (min-width: 960px){ .card-grid{ grid-template-columns:repeat(3,1fr); } }
