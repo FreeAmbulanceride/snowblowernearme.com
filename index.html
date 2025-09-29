@@ -53,7 +53,7 @@
 <body>
 <header class="site">
   <div class="container inner">
-    <a class="logo" href="/"><img src="/assets/logo.svg" alt="Logo" width="28" height="28"> snowblowernearme<span class="dot">.</span>com</a>
+    <a class="logo" href="/"><img src="/assets/logo.svg" alt="" width="24" height="24"> snowblowernearme<span>.com</span></a>
     <nav class="sticky-cta">
       <a class="btn btn--primary" href="#top-picks">Buy now</a>
       <a class="btn btn--secondary" href="#local-services">Get local help</a>
@@ -61,47 +61,42 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <h1>Snow blowers in <span data-city>your city</span>: In-stock picks & local options</h1>
-    <p class="sub">Fast compare of the best single- & two-stage models, plus a quick form to find rental/repair near you.</p>
-    <div class="actions">
-      <a class="btn btn--primary" href="#top-picks">See Top Picks</a>
-      <a class="btn btn--secondary" href="#local-services">Find Local Help</a>
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Snow blowers in <span data-city>your city</span>: In-stock picks & local options</h1>
+      <p class="sub">Quick compare of the best single- and two-stage models, plus a fast rental/repair form.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#top-picks">See Top Picks</a>
+        <a class="btn btn--secondary" href="#local-services">Find Local Help</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section id="top-picks" class="section">
-    <div class="container cards">
+    <div class="container">
       <h2>Today's Top 3 Picks</h2>
       <ul class="card-grid" aria-label="Top snow blowers">
         <li class="card">
-          <figure>
-            <img src="/assets/picks/ariens.png" alt="Ariens Deluxe 28 two-stage snow blower" loading="lazy">
-          </figure>
-          <h3>Two-stage 28" Gas &mdash; Heavy Snow</h3>
-          <ul class="specs"><li>Stage: 2-stage</li><li>Width: 28"</li><li>Power: Gas</li></ul>
-          <p class="pros">Pros: throws far, handles drifts; Cons: louder, maintenance</p>
-          <a class="btn btn--primary" rel="nofollow sponsored" onclick="trackClick('Pick1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
+          <div class="thumb"><img src="/assets/picks/ariens.png" alt="Ariens Deluxe 28 two-stage snow blower" loading="lazy"></div>
+          <h3>Ariens Deluxe 28 &mdash; Two-stage Gas</h3>
+          <ul class="specs"><li>28" width</li><li>Gas</li><li>Heavy snow</li></ul>
+          <p class="pros">Pros: throws far &bull; Cons: louder, maintenance</p>
+          <a class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Pick1')" href="https://www.amazon.com/s?k=ariens+deluxe+28+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
         </li>
         <li class="card">
-          <figure>
-            <img src="/assets/picks/ego.png" alt="EGO Power+ 21 inch cordless snow blower" loading="lazy">
-          </figure>
-          <h3>Cordless 21" &mdash; Driveway &amp; walkway</h3>
-          <ul class="specs"><li>Stage: 1-stage</li><li>Width: 21"</li><li>Power: Battery</li></ul>
-          <p class="pros">Pros: low upkeep, quick start; Cons: run-time in heavy wet snow</p>
-          <a class="btn btn--primary" rel="nofollow sponsored" onclick="trackClick('Pick2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
+          <div class="thumb"><img src="/assets/picks/ego.png" alt="EGO Power+ 21 inch cordless snow blower" loading="lazy"></div>
+          <h3>EGO Power+ 21 &mdash; Cordless Single-stage</h3>
+          <ul class="specs"><li>21" width</li><li>Battery</li><li>Driveways &amp; walkways</li></ul>
+          <p class="pros">Pros: low upkeep &bull; Cons: runtime drops in heavy slush</p>
+          <a class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Pick2')" href="https://www.amazon.com/s?k=ego+21+inch+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
         </li>
         <li class="card">
-          <figure>
-            <img src="/assets/picks/toro.png" alt="Toro Power Clear 721 single-stage snow blower" loading="lazy">
-          </figure>
-          <h3>Single-stage 21" Gas &mdash; Budget workhorse</h3>
-          <ul class="specs"><li>Stage: 1-stage</li><li>Width: 21"</li><li>Power: Gas</li></ul>
-          <p class="pros">Pros: affordable, agile; Cons: struggles with deep drifts</p>
-          <a class="btn btn--primary" rel="nofollow sponsored" onclick="trackClick('Pick3')" href="https://www.amazon.com/s?k=single+stage+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
+          <div class="thumb"><img src="/assets/picks/toro.png" alt="Toro Power Clear 721 single-stage snow blower" loading="lazy"></div>
+          <h3>Toro Power Clear 721 &mdash; Single-stage Gas</h3>
+          <ul class="specs"><li>21" width</li><li>Gas</li><li>Budget-friendly</li></ul>
+          <p class="pros">Pros: agile, affordable &bull; Cons: struggles with deep drifts</p>
+          <a class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Pick3')" href="https://www.amazon.com/s?k=toro+power+clear+721&amp;tag=snowme-20">Buy on Amazon</a>
         </li>
       </ul>
     </div>
@@ -110,16 +105,16 @@
   <section class="section compare">
     <div class="container">
       <h2>Quick Compare</h2>
-      <div class="table-wrap" role="region" aria-label="Comparison table">
+      <div class="table-wrap">
         <table>
           <thead><tr><th>Model Type</th><th>Width</th><th>Power</th><th>Best for</th><th>Buy</th></tr></thead>
           <tbody>
-            <tr><td>2-stage</td><td>28"</td><td>Gas</td><td>Heavy snow, long driveways</td>
-              <td><a class="btn btn--primary small" rel="nofollow sponsored" onclick="trackClick('Table1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
-            <tr><td>1-stage</td><td>21"</td><td>Battery</td><td>Urban, quick clears</td>
-              <td><a class="btn btn--primary small" rel="nofollow sponsored" onclick="trackClick('Table2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
-            <tr><td>1-stage</td><td>21"</td><td>Gas</td><td>Budget, medium snowfall</td>
-              <td><a class="btn btn--primary small" rel="nofollow sponsored" onclick="trackClick('Table3')" href="https://www.amazon.com/s?k=single+stage+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
+            <tr><td>Two-stage</td><td>28"</td><td>Gas</td><td>Heavy snow, long driveways</td>
+              <td><a class="btn btn--primary small" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Table1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
+            <tr><td>Single-stage</td><td>21"</td><td>Battery</td><td>Urban homes, quick clears</td>
+              <td><a class="btn btn--primary small" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Table2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
+            <tr><td>Single-stage</td><td>21"</td><td>Gas</td><td>Budget, medium snowfall</td>
+              <td><a class="btn btn--primary small" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Table3')" href="https://www.amazon.com/s?k=single+stage+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
           </tbody>
         </table>
       </div>
