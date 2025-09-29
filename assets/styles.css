@@ -2,7 +2,7 @@
 :root{
   --bg:#0B1320; --surface:#0F1B2E; --card:#12233C;
   --text:#FFFFFF; --muted:#C8D2E0; --link:#93C5FD;
-  --primary:#f5940b; --primaryText:#0A1B2E;
+  --primary:#f50b59; --primaryText:#0A1B2E;
   --secondary:#0F766E; --secondaryText:#FFFFFF;
   --radius:16px; --maxw:1100px;
 }
