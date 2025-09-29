@@ -20,13 +20,24 @@
   async function geonote() {
     if (!('geolocation' in navigator)) return;
     try {
-      var p = await new Promise(function(res, rej){
-        navigator.geolocation.getCurrentPosition(res, rej, {maximumAge:600000, timeout:3000});
+      var position = await new Promise(function(res, rej){
+        navigator.geolocation.getCurrentPosition(res, rej, {maximumAge:600000, timeout:4000});
       });
-      var lat = p.coords.latitude.toFixed(3);
-      var lon = p.coords.longitude.toFixed(3);
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      var cityName = '';
+      try {
+        var endpoint = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + encodeURIComponent(lat) + '&longitude=' + encodeURIComponent(lon) + '&localityLanguage=en';
+        var response = await fetch(endpoint, {headers:{'Accept':'application/json'}});
+        if (response.ok) {
+          var data = await response.json();
+          cityName = data.city || data.locality || data.principalSubdivision || '';
+        }
+      } catch (geoErr) {}
+      var fallback = 'your area (' + lat.toFixed(3) + ', ' + lon.toFixed(3) + ')';
+      var label = cityName ? cityName : fallback;
       document.querySelectorAll('[data-city]').forEach(function(el){
-        el.textContent = 'your area (' + lat + ', ' + lon + ')';
+        el.textContent = label;
       });
     } catch (e) {}
   }
@@ -63,18 +74,27 @@
   <h2>Today's Top 3 Picks</h2>
   <ul class="card-grid" aria-label="Top snow blowers">
     <li class="card">
+      <figure>
+        <img src="https://m.media-amazon.com/images/I/71S7rDg14NL._AC_SL1500_.jpg" alt="Ariens Deluxe 28 two-stage snow blower" loading="lazy">
+      </figure>
       <h3>Two-stage 28" Gas &mdash; Heavy Snow</h3>
       <ul class="specs"><li>Stage: 2-stage</li><li>Width: 28"</li><li>Power: Gas</li></ul>
       <p class="pros">Pros: throws far, handles drifts; Cons: louder, maintenance</p>
       <a class="btn buy" rel="nofollow sponsored" onclick="trackClick('Pick1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
     </li>
     <li class="card">
+      <figure>
+        <img src="https://m.media-amazon.com/images/I/81TFEsv5nWL._AC_SL1500_.jpg" alt="EGO Power+ 21 inch cordless snow blower" loading="lazy">
+      </figure>
       <h3>Cordless 21" &mdash; Driveway &amp; walkway</h3>
       <ul class="specs"><li>Stage: 1-stage</li><li>Width: 21"</li><li>Power: Battery</li></ul>
       <p class="pros">Pros: low upkeep, quick start; Cons: run-time in heavy wet snow</p>
       <a class="btn buy" rel="nofollow sponsored" onclick="trackClick('Pick2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy on Amazon</a>
     </li>
     <li class="card">
+      <figure>
+        <img src="https://m.media-amazon.com/images/I/81OZrqE8HoL._AC_SL1500_.jpg" alt="Toro Power Clear 721 single-stage snow blower" loading="lazy">
+      </figure>
       <h3>Single-stage 21" Gas &mdash; Budget workhorse</h3>
       <ul class="specs"><li>Stage: 1-stage</li><li>Width: 21"</li><li>Power: Gas</li></ul>
       <p class="pros">Pros: affordable, agile; Cons: struggles with deep drifts</p>

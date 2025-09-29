@@ -22,10 +22,13 @@ a{color:#93C5FD}a:focus{outline:2px solid #93C5FD;outline-offset:2px}
 .cards,.compare,.lead,.weather,.faq{max-width:var(--maxw);margin:16px auto;padding:0 16px}
 .cards h2,.compare h2,.lead h2,.weather h2,.faq h2{font-size:1.2rem;margin:0 0 12px}
 .card-grid{display:grid;grid-template-columns:1fr;gap:12px;list-style:none;padding:0;margin:0}
-.card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:14px}
-.card h3{margin:0 0 6px;font-size:1rem}
-.specs{display:flex;gap:10px;list-style:none;padding:0;margin:0 0 8px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.card figure{margin:0}
+.card img{width:100%;border-radius:10px;object-fit:cover;max-height:190px}
+.card h3{margin:0;font-size:1rem}
+.specs{display:flex;gap:10px;list-style:none;padding:0;margin:0 0 8px;color:var(--muted);flex-wrap:wrap}
 .pros{margin:0 0 10px}
+.card .btn{align-self:flex-start}
 .table-wrap{overflow-x:auto;background:var(--surface);border-radius:12px;border:1px solid rgba(255,255,255,0.05)}
 table{width:100%;border-collapse:separate;border-spacing:0}
 th,td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left}
