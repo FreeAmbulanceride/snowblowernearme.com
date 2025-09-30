@@ -1,0 +1,79 @@
+{
+  "start_date": "2025-09-30",
+  "distributions": {
+    "sessions_start": "triangular",
+    "sessions_end": "triangular",
+    "affiliate_ctr": "triangular",
+    "epc_usd": "triangular"
+  },
+  "scenarios": {
+    "conservative": {
+      "sessions_start": [
+        15,
+        25,
+        40
+      ],
+      "sessions_end": [
+        120,
+        180,
+        260
+      ],
+      "affiliate_ctr": [
+        0.01,
+        0.02,
+        0.04
+      ],
+      "epc_usd": [
+        0.06,
+        0.12,
+        0.2
+      ]
+    },
+    "base": {
+      "sessions_start": [
+        25,
+        45,
+        70
+      ],
+      "sessions_end": [
+        250,
+        400,
+        600
+      ],
+      "affiliate_ctr": [
+        0.02,
+        0.05,
+        0.08
+      ],
+      "epc_usd": [
+        0.1,
+        0.25,
+        0.4
+      ]
+    },
+    "upside": {
+      "sessions_start": [
+        40,
+        70,
+        110
+      ],
+      "sessions_end": [
+        450,
+        700,
+        1000
+      ],
+      "affiliate_ctr": [
+        0.04,
+        0.08,
+        0.12
+      ],
+      "epc_usd": [
+        0.2,
+        0.4,
+        0.7
+      ]
+    }
+  },
+  "seasonality_multiplier": "Jan1.4 Feb1.1 Mar0.8 Apr0.6 May0.5 Jun0.4 Jul0.4 Aug0.5 Sep0.6 Oct0.9 Nov1.2 Dec1.3",
+  "sources_note": "See research.md for citations."
+}

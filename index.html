@@ -59,6 +59,9 @@
       <a class="btn btn--primary" href="#top-picks">Buy now</a>
       <a class="btn btn--secondary" href="#local-services">Get local help</a>
     </nav>
+    <p class="disclosure">
+      As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.
+    </p>
   </div>
 </header>
 
@@ -67,7 +70,7 @@
     <div class="container">
       <h1>Snow blowers in <span data-city>your city</span>: In-stock picks & local options</h1>
       <p class="sub">Quick compare of the best single- and two-stage models, plus a fast rental/repair form.</p>
-  <p class="note-trust">Some links are affiliate links—if you buy, we may earn a commission at no extra cost to you.</p>
+        <p class="note-trust">Some links are affiliate linksif you buy, we may earn a commission at no extra cost to you.</p>
       <div class="actions">
         <a class="btn btn--primary" href="#top-picks">See Top Picks</a>
         <a class="btn btn--secondary" href="#local-services">Find Local Help</a>
@@ -78,7 +81,31 @@
   <section id="top-picks" class="section">
     <div class="container">
       <h2>Today's Top 5 Picks</h2>
-      <ul class="card-grid" id="top-grid" aria-label="Top snow blowers"></ul>
+        <section class="grid">
+          <article class="tile">
+            <h2>Best for deep, wet snow (2-stage)</h2>
+            <p class="meta">Steel auger  self-propelled  gravel-safe</p>
+            <a class="cta" data-model="Ariens Classic 24\"" rel="sponsored nofollow noopener" target="_blank">
+              Check price at Northern Tool 
+            </a>
+          </article>
+          <article class="tile">
+            <h2>Best low-noise (single-stage electric)</h2>
+            <p class="meta">Battery  paved driveways  quick starts</p>
+            <a class="cta" data-model="EGO Power+ 21\"" rel="sponsored nofollow noopener" target="_blank">
+              Check price at Ace Hardware 
+            </a>
+          </article>
+        </section>
+        <script type="module">
+          import { bestLinkFor } from '/js/link-resolver.js';
+          document.querySelectorAll('.cta').forEach(a=>{
+            const url = bestLinkFor(a.dataset.model) || 'https://www.amazon.com/s?k=snow+blower&tag=snowme-20';
+            a.href = url;
+            a.addEventListener('click', ()=>console.log('affiliate_click',{model:a.dataset.model, url}));
+          });
+        </script>
+        <ul class="card-grid" id="top-grid" aria-label="Top snow blowers"></ul>
     </div>
   </section>
 
@@ -132,7 +159,9 @@
 
 <footer class="site">
   <div class="container">
-    <p><strong>Affiliate disclosure:</strong> We may earn commissions from qualifying purchases. Recommendations are independent and based on utility and availability.</p>
+    <p class="disclosure">
+      As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.
+    </p>
     <nav class="links">
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -141,45 +170,15 @@
   </div>
 </footer>
 
-<!-- JSON-LD: WebSite + SearchAction, ItemList (Top 3), Breadcrumb, FAQPage -->
+<!-- JSON-LD: ItemList for above-the-fold tiles -->
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
-    {
-      "@type":"WebSite",
-      "name":"SnowBlowerNearMe",
-      "url":"https://snowblowernearme.com/",
-      "potentialAction":{
-        "@type":"SearchAction",
-        "target":"https://snowblowernearme.com/locations/{search_term_string}.html",
-        "query-input":"required name=search_term_string"
-      }
-    },
-    {
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"Home","item":"https://snowblowernearme.com/"}
-      ]
-    },
-    {
-      "@type":"ItemList",
-      "name":"Top Snow Blower Picks",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Two-stage 28\" Gas"}},
-        {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Cordless 21\""}},
-        {"@type":"ListItem","position":3,"item":{"@type":"Product","name":"Single-stage 21\" Gas"}}
-      ]
-    },
-    {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {"@type":"Question","name":"Single- vs two-stage?","acceptedAnswer":{"@type":"Answer","text":"Two-stage units handle deep drifts better; single-stage suits lighter snow and smaller areas."}},
-        {"@type":"Question","name":"Electric vs gas?","acceptedAnswer":{"@type":"Answer","text":"Electric starts instantly and is low-maintenance; gas wins on run-time and power for heavy or wet snow."}},
-        {"@type":"Question","name":"Shipping speed?","acceptedAnswer":{"@type":"Answer","text":"Varies by retailer and region; order ahead when snow is forecast."}}
-      ]
-    }
-  ]
+ "@context":"https://schema.org",
+ "@type":"ItemList",
+ "itemListElement":[
+  {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Ariens Classic 24\" Two-Stage","brand":"Ariens","category":"Snow Blower"}},
+  {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"EGO Power+ 21\" Single-Stage","brand":"EGO","category":"Snow Blower"}}
+ ]
 }
 </script>
 </script>
@@ -271,6 +270,35 @@
     document.querySelectorAll('a[href]').forEach(applyTag);
   });
 })();
+</script>
+</script>
+<!-- Sticky CTA bar and compare drawer -->
+<div class="sticky-cta" id="sticky">
+  <a id="cta-compare" href="#compare">Compare picks</a>
+  <a id="cta-best" rel="sponsored nofollow noopener" target="_blank">See today’s price</a>
+</div>
+<script type="module">
+const manifest = await fetch('/link_manifest.json').then(r=>r.json());
+function bestLinkForFirstTile(){
+  // You can change this to pick by geo, merchant EPC, or inventory
+  const item = manifest[0]; // first top-pick for now
+  const sorted = [...item.destinations].sort((a,b)=>a.priority-b.priority);
+  return sorted[0]?.url || 'https://www.amazon.com/s?k=snow+blower&tag=snowme-20';
+}
+const best = bestLinkForFirstTile();
+const cta = document.getElementById('cta-best');
+cta.href = best;
+cta.addEventListener('click', () => {
+  // minimal analytics; wire to Gtag or Plausible later
+  console.log('affiliate_click', {merchant: new URL(best).hostname});
+});
+</script>
+<script>
+  document.addEventListener('scroll', () => {
+    if ((window.scrollY+window.innerHeight)/document.body.scrollHeight > 0.75) {
+      console.log('scroll_75');
+    }
+  });
 </script>
 </body>
 </html>

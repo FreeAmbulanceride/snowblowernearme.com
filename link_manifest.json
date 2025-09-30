@@ -1,0 +1,18 @@
+[
+  {
+    "model": "EGO Power+ 21\" Single-Stage",
+    "fallback": "amazon",
+    "destinations": [
+      {
+        "merchant": "ace_hardware",
+        "url": "https://www.acehardware.com/search?query=EGO%20Power%2021%20snow%20blower",
+        "priority": 1
+      },
+      {
+        "merchant": "amazon",
+        "url": "https://www.amazon.com/s?k=EGO+Power%2B+21+snow+blower&tag=snowme-20",
+        "priority": 2
+      }
+    ]
+  }
+]

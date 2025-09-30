@@ -1,0 +1,14 @@
+[
+  {
+    "merchant": "amazon",
+    "network": "Amazon Associates",
+    "id_example": "snowme-20",
+    "cookie_days": 1,
+    "notes": "text links only; no images/prices without PA-API",
+    "geo": [
+      "US",
+      "CA"
+    ],
+    "typical_commission_range": "1-4%"
+  }
+]
