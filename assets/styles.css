@@ -7,12 +7,15 @@
   --secondary:#0F766E; --secondaryText:#FFFFFF;
   --link:#93C5FD;
   --radius:12px; --maxw:1000px; --shadow:0 8px 22px rgba(0,0,0,.28);
+  --focus:#93C5FD;
+  --primaryHover:#f7b43e; --primaryPress:#d98700;
+  --secondaryHover:#119488; --secondaryPress:#0b5b55;
 }
 
 /* Base */
 body{background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; -webkit-font-smoothing:antialiased}
 a{color:var(--link);text-decoration:none}
-a:focus,.btn:focus{outline:2px solid var(--link);outline-offset:2px;border-radius:10px}
+a:focus,.btn:focus{outline:3px solid var(--focus);outline-offset:2px;border-radius:10px}
 
 /* Layout */
 .container{max-width:var(--maxw);margin:0 auto;padding:0 16px}
@@ -20,7 +23,13 @@ a:focus,.btn:focus{outline:2px solid var(--link);outline-offset:2px;border-radiu
 .stack>*+*{margin-top:16px}
 
 /* Header */
-header.site{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.9);backdrop-filter:saturate(110%) blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(11,18,32,.9);
+  backdrop-filter:saturate(110%) blur(6px);
+  -webkit-backdrop-filter:saturate(110%) blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.06)
+}
 header .inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
 .logo{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--text)}
 .sticky-cta{display:flex;gap:8px}
@@ -34,6 +43,11 @@ header .inner{display:flex;align-items:center;justify-content:space-between;padd
 }
 .btn--primary{background:var(--primary);color:var(--primaryText)}
 .btn--primary:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(245,158,11,.3)}
+.btn--primary:hover{background:var(--primaryHover)}
+.btn--primary:active{background:var(--primaryPress);transform:translateY(1px)}
+.btn--secondary:hover{background:var(--secondaryHover)}
+.btn--secondary:active{background:var(--secondaryPress);transform:translateY(1px)}
+.note-trust{color:var(--subtle);font-size:.95rem}
 .btn--secondary{background:var(--secondary);color:var(--secondaryText)}
 .btn--secondary:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(15,118,110,.3)}
 .btn.small{min-height:36px;padding:8px 12px}
