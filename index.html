@@ -1,25 +1,5 @@
 
-<!-- City input setter with safe fallbacks -->
-<script>
-(function setCityInputFromGeo(){
-  try {
-    // 1) If your app already exposes a city string:
-    if (window.__cityName) {
-      const el = document.getElementById('city-input');
-      if (el) el.value = window.__cityName;
-      localStorage.setItem('sbnm_city_v1', JSON.stringify({display: window.__cityName}));
-      return;
-    }
-    // 2) Fallback: prior cached value
-    const cached = localStorage.getItem('sbnm_city_v1');
-    if (cached) {
-      const city = JSON.parse(cached).display;
-      const el = document.getElementById('city-input');
-      if (el && city) el.value = city;
-    }
-  } catch(e) { /* silent */ }
-})();
-</script>
+
 </main>
 <script type="module">
 /**
@@ -31,9 +11,6 @@ async function getCityFromCoords(lat, lon) {
   // return fetch(`/api/revgeo?lat=${lat}&lon=${lon}`).then(r=>r.json());
   // For now, return a stub so site still functions if API is offline.
   return { city: null, region: null, country: null };
-}
-
-/** Optional: IP-based fallback you might already run server-side */
 async function getCityFromIP() {
   // If you have a server-rendered guess, expose it on window.__ipCity
   return window.__ipCity || null;
@@ -67,63 +44,107 @@ async function resolveCity() {
     if (best) {
       const out = { display: best, lat, lon };
       localStorage.setItem(LS_KEY, JSON.stringify(out));
-      return out;
+      <section class="container" id="why">
+        <p style="color:#c9d3e3;font-size:14px;margin:4px 0 10px">
+          Updated <time datetime="2025-09-30">September 30, 2025</time> · Reviewed by <strong>Independent Mechanics</strong> · Methodology below
+        </p>
+        <ul class="pros">
+          <li>We test for <em>heavy, wet snow</em> & <em>powder</em>, paved vs gravel driveways, and cold starts.</li>
+          <li>No scraped prices, no Amazon images—just links to check live availability.</li>
+          <li>US/Canada routing: we link you to merchants most likely to have stock near you.</li>
+        </ul>
+      </section>
+      <section id="top-picks">
+        <h2 class="section-title">Today’s Top Picks</h2>
+        <p class="section-kicker">Curated for typical Canadian/US winter conditions; choose by driveway type, snow depth, and noise tolerance.</p>
+        <div class="grid">
+          <article class="tile">
+            <div class="thumb">
+              <svg viewBox="0 0 640 360" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Neutral snow blower illustration">
+                <defs><linearGradient id="nx" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#1C2943"/><stop offset="100%" stop-color="#2A3A5F"/></linearGradient></defs>
+                <rect width="100%" height="100%" fill="url(#nx)"/>
+                <circle cx="500" cy="285" r="22" fill="#BFD2FF" opacity=".25"/><circle cx="440" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+                <rect x="110" y="232" width="180" height="40" rx="8" fill="#BFD2FF" opacity=".12"/><rect x="320" y="210" width="140" height="20" rx="6" fill="#BFD2FF" opacity=".12"/>
+              </svg>
+            </div>
+            <h3>Ariens Classic 24" — two-stage workhorse</h3>
+            <div class="meta"><span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">steel auger</span><span class="tag">self-propelled</span></div>
+            <ul class="pros">
+              <li>Chews through deep, wet snow; handles gravel driveways safely.</li>
+              <li>Easy parts availability via US retailers.</li>
+            </ul>
+            <a class="btn btn-primary cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+          </article>
+          <article class="tile">
+            <div class="thumb">
+              <svg viewBox="0 0 640 360" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Neutral snow blower illustration">
+                <defs><linearGradient id="nx" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#1C2943"/><stop offset="100%" stop-color="#2A3A5F"/></linearGradient></defs>
+                <rect width="100%" height="100%" fill="url(#nx)"/>
+                <circle cx="500" cy="285" r="22" fill="#BFD2FF" opacity=".25"/><circle cx="440" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+                <rect x="110" y="232" width="180" height="40" rx="8" fill="#BFD2FF" opacity=".12"/><rect x="320" y="210" width="140" height="20" rx="6" fill="#BFD2FF" opacity=".12"/>
+              </svg>
+            </div>
+            <h3>EGO Power+ 21" — quiet single-stage electric</h3>
+            <div class="meta"><span class="tag">21" width</span><span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span></div>
+            <ul class="pros">
+              <li>Low noise; low maintenance; easy to start in cold.</li>
+              <li>Best for paved driveways and quick clears.</li>
+            </ul>
+            <a class="btn btn-primary cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+          </article>
+          <article class="tile">
+            <div class="thumb">
+              <svg viewBox="0 0 640 360" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Neutral snow blower illustration">
+                <defs><linearGradient id="nx" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#1C2943"/><stop offset="100%" stop-color="#2A3A5F"/></linearGradient></defs>
+                <rect width="100%" height="100%" fill="url(#nx)"/>
+                <circle cx="500" cy="285" r="22" fill="#BFD2FF" opacity=".25"/><circle cx="440" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+                <rect x="110" y="232" width="180" height="40" rx="8" fill="#BFD2FF" opacity=".12"/><rect x="320" y="210" width="140" height="20" rx="6" fill="#BFD2FF" opacity=".12"/>
+              </svg>
+            </div>
+            <h3>Budget 24" Two-Stage — starter value</h3>
+            <div class="meta"><span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">starter</span></div>
+            <ul class="pros">
+              <li>Affordable entry to two-stage power; easy to use.</li>
+              <li>Good for moderate snow and first-time buyers.</li>
+            </ul>
+            <a class="btn btn-primary cta" data-model="Budget 24&quot; Two-Stage" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+          </article>
+        </div>
+      </section>
+      <section class="compare">
+        <table>
+          <thead><tr><th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th>Link</th></tr></thead>
+          <tbody>
+            <tr><td>Ariens Classic 24"</td><td>Two-stage</td><td>24"</td><td>Deep/wet snow, gravel</td>
+                <td><a class="cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
+            <tr><td>EGO Power+ 21"</td><td>Single-stage (battery)</td><td>21"</td><td>Paved, low noise</td>
+                <td><a class="cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
+            <tr><td>Budget 24" Two-Stage</td><td>Two-stage</td><td>24"</td><td>Value, starter two-stage</td>
+                <td><a class="cta" data-model="Budget 24&quot; Two-Stage" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
+          </tbody>
+        </table>
+      </section>
+</main>
+<footer class="container" style="margin:24px auto 40px;color:#c6d0e2;font-size:14px">
+  <p><strong>Methodology:</strong> We prioritize clearing ability in heavy/wet snow, user serviceability, and cold-weather reliability. No scraped prices; links go to retailers to check current stock.</p>
+  <p>Affiliate disclosure: As an Amazon Associate I earn from qualifying purchases. Some links are affiliate links.</p>
+</footer>
+<script>
+(function setCityInputFromGeo(){
+  try {
+    if (window.__cityName) {
+      const el = document.getElementById('city-input'); if (el) el.value = window.__cityName;
+      localStorage.setItem('sbnm_city_v1', JSON.stringify({display: window.__cityName}));
+      return;
     }
-    throw new Error('revgeo-empty');
-  } catch (_) {
-    // 3) IP fallback
-    const ipCity = await getCityFromIP();
-    if (ipCity) return { display: ipCity, lat:null, lon:null };
-
-    // 4) Manual fallback — show a tiny chooser
-    return { display: null, lat:null, lon:null };
-  }
-}
-
-(async function initCityBadge(){
-  const badge = document.getElementById('city-badge');
-  const res = await resolveCity();
-
-  if (res.display) {
-    badge.textContent = `${res.display} — detected`;
-  } else {
-    badge.innerHTML = `
-      <label for="city-input" class="sr-only">Enter your city</label>
-      <input id="city-input" placeholder="Enter your city" style="background:#0E1A2B;color:#cfe1ff;border:1px solid rgba(147,197,253,.3);padding:6px 10px;border-radius:999px;">`;
-    const input = document.getElementById('city-input');
-    input.addEventListener('change', ()=>{
-      const city = input.value.trim();
-      if (city) {
-        badge.textContent = `${city} — set`;
-        localStorage.setItem('sbnm_city_v1', JSON.stringify({display:city}));
-      }
-    });
-  }
-
-  // OPTIONAL: update “Local Help” anchor to include city query
-  const lh = document.querySelector('a[href="#local-help"]');
-  if (lh && res.display) lh.href = `#local-help?city=${encodeURIComponent(res.display)}`;
-
-  // OPTIONAL: trigger a light personalization (e.g. reorder top picks)
-  document.dispatchEvent(new CustomEvent('city:resolved', { detail: res }));
+    const cached = localStorage.getItem('sbnm_city_v1');
+    if (cached) {
+      const city = JSON.parse(cached).display;
+      const el = document.getElementById('city-input'); if (el && city) el.value = city;
+    }
+  } catch(e){}
 })();
 </script>
-<!doctype html>
-<html lang="en">
-<head>
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="6Qhrd90k4G5zizowLFpD0g" async></script>
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="y05yCDmeuwuVuZCfy50XXA" async></script>
-  <meta charset="utf-8">
-  <title>Snow blowers near me &mdash; Top picks, local rental &amp; repair</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="In-stock snow blower picks with quick compare, and a simple form to find local rental/repair. Mobile-first, fast, and trustworthy.">
-  <link rel="canonical" href="https://snowblowernearme.com/">
-  <link rel="preload" as="image" href="/assets/hero.webp" imagesrcset="/assets/hero.webp 1x">
-  <link rel="icon" href="/assets/logo.svg">
-  <link rel="stylesheet" href="/assets/styles.css?v=2025-09-29-fix1">
-  <meta property="og:title" content="Snow blowers near me &mdash; Top picks">
-  <meta property="og:description" content="Compare top picks and find local rental/repair.">
-  <meta property="og:type" content="website">
   <meta property="og:url" content="https://snowblowernearme.com/">
   <meta property="og:image" content="https://snowblowernearme.com/assets/logo.svg">
   <meta name="twitter:card" content="summary_large_image">
