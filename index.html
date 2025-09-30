@@ -1,3 +1,20 @@
+(function setCityInputFromGeo(){
+  // If your code already resolves a city, set the input value
+  if (window.__cityName) {
+    const el = document.getElementById('city-input');
+    if (el) el.value = window.__cityName;
+  } else {
+    // Try to use localStorage fallback from previous geolocation logic
+    try {
+      const cached = localStorage.getItem('sbnm_city_v1');
+      if (cached) {
+        const city = JSON.parse(cached).display;
+        const el = document.getElementById('city-input');
+        if (el && city) el.value = city;
+      }
+    } catch(e){}
+  }
+})();
 </main>
 <script type="module">
 /**
@@ -141,20 +158,25 @@ async function resolveCity() {
 </head>
 <body>
 <header class="site-header">
-  <div class="site-brand">
-    <div class="logo" aria-hidden="true"></div>
-    <div class="name">snowblowernearme.com</div>
+  <div class="container header-inner">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="name">snowblowernearme.com</span>
+    </div>
+    <p class="disclosure">
+      As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.
+    </p>
   </div>
-  <p class="disclosure">
-    As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.
-  </p>
 </header>
 
 <main class="container">
-  <section class="hero">
-    <span class="badge" id="city-badge" aria-live="polite">Detecting your city…</span>
+  <section class="hero card">
+    <div class="hero-top">
+      <label class="city-label" for="city-input">Enter your city</label>
+      <input id="city-input" placeholder="Hamilton, ON" inputmode="text" />
+    </div>
     <h1>Snow blowers near you — in stock & ready</h1>
-    <p class="sub">Quick compare of the best single- and two-stage options, plus a fast rental/repair finder. Neutral visuals, no scraped prices—click through to see current availability.</p>
+    <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for availability.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#top-picks">See Top Picks</a>
       <a class="btn btn-ghost" href="#local-help">Find Local Help</a>
@@ -165,25 +187,47 @@ async function resolveCity() {
     <h2 class="section-title">Today’s Top Picks</h2>
     <p class="section-kicker">Curated for typical Canadian/US winter conditions; choose by driveway type, snow depth, and noise tolerance.</p>
     <div class="grid">
+      <!-- Card 1 -->
       <article class="tile">
-        <div class="thumb" role="img" aria-label="Neutral illustration for two-stage snow blower"></div>
+        <div class="thumb">
+          <!-- neutral, legal SVG (no Amazon assets) -->
+          <svg viewBox="0 0 640 360" role="img" aria-label="Neutral snow blower illustration">
+            <defs>
+              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1C2943"/>
+                <stop offset="100%" stop-color="#2A3A5F"/>
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#g)"/>
+            <circle cx="520" cy="300" r="28" fill="#BFD2FF" opacity=".25"/>
+            <circle cx="440" cy="300" r="28" fill="#BFD2FF" opacity=".25"/>
+            <rect x="120" y="230" width="180" height="44" rx="8" fill="#BFD2FF" opacity=".15"/>
+            <rect x="320" y="210" width="160" height="24" rx="6" fill="#BFD2FF" opacity=".15"/>
+          </svg>
+        </div>
         <h3>Ariens Classic 24" — two-stage workhorse</h3>
         <div class="meta">
           <span class="tag">two-stage</span><span class="tag">self-propelled</span><span class="tag">gravel-safe</span>
         </div>
-        <div class="spacer"></div>
-        <a class="btn btn-primary cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">Check price at Northern Tool →</a>
+        <a class="btn btn-primary cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">
+          Check price at Northern Tool →
+        </a>
       </article>
+      <!-- Card 2 -->
       <article class="tile">
-        <div class="thumb" role="img" aria-label="Neutral illustration for single-stage electric snow blower"></div>
+        <div class="thumb">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Neutral snow blower illustration">
+            <use href="#g"></use>
+          </svg>
+        </div>
         <h3>EGO Power+ 21" — quiet single-stage electric</h3>
         <div class="meta">
           <span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span>
         </div>
-        <div class="spacer"></div>
-        <a class="btn btn-primary cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">Check price at Ace Hardware →</a>
+        <a class="btn btn-primary cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">
+          Check price at Ace Hardware →
+        </a>
       </article>
-      <!-- add more cards as needed -->
     </div>
   </section>
 
