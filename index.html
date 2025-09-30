@@ -207,7 +207,10 @@
   const toCard = p => `
     <li class="card">
       <div class="thumb">
-        ${p.image?`<a href="${p.url}" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('affiliate_img:'+(p.asin||'q'))"><img src="${p.image}" alt="${p.title}" loading="lazy"></a>`:''}
+        ${p.image
+          ? `<a href="${p.url}" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('affiliate_img:'+(p.asin||'q'))"><img src="${p.image}" alt="${p.title}" loading="lazy"></a>`
+          : (p.asin === "B0CNY8JQ7B" ? `<a href="${p.url}" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('affiliate_img:'+(p.asin||'q'))"><div style='display:flex;align-items:center;justify-content:center;height:120px;font-weight:600;font-size:1.1rem;color:var(--subtle);background:linear-gradient(135deg,#232b3a 60%,#f59e0b 100%);border-radius:var(--radius);'>STEELITE Cordless Snow Blower</div></a>` : '')
+        }
       </div>
       <h3>${p.title}</h3>
       <ul class="specs">
