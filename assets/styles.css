@@ -1,3 +1,16 @@
+/* Center .card-grid when only 1 or 2 cards */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
+.card-grid:has(> .card:nth-child(3)) {
+  justify-content: flex-start;
+}
+.card-grid:not(:has(> .card:nth-child(3))) {
+  justify-content: center;
+}
 /* ========== UI RESET (small, safe) ========== */
 *{box-sizing:border-box} html,body{margin:0;padding:0}
 :root{
