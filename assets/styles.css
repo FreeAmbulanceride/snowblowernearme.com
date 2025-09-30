@@ -1,3 +1,29 @@
+/* Compare component (no inline styles) */
+.compare {
+  margin-top: 18px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,.28);
+  background: #0F1B2A;
+}
+.compare table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.compare thead tr {
+  background: #111f35;
+  color: #dbe6ff;
+}
+.compare th,
+.compare td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.compare tbody tr:last-child td { border-bottom: 0; }
+.compare td:last-child,
+.compare th:last-child { text-align: right; }
 /* Center containers everywhere */
 .container{max-width:1040px;margin:0 auto;padding:24px}
 

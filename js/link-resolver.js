@@ -20,10 +20,13 @@ function ensureAmazonTag(u) {
     const url = new URL(u);
     const host = url.hostname.toLowerCase();
     if (host.includes('amazon.')) {
-      url.searchParams.set('tag', AMAZON_TAGS[host] || AMAZON_TAGS['amazon.com']);
-      url.searchParams.set('utm_source','site');
-      url.searchParams.set('utm_medium','affiliate');
-      url.searchParams.set('utm_campaign','snowblowers');
+      const TAGS = {
+        'amazon.com': 'snowme-20',
+        'www.amazon.com': 'snowme-20',
+        'amazon.ca':  'cansnowme-20',
+        'www.amazon.ca': 'cansnowme-20'
+      };
+      url.searchParams.set('tag', TAGS[host] || TAGS['amazon.com']);
     }
     return url.toString();
   } catch { return u; }

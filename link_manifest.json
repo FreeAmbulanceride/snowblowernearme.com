@@ -3,32 +3,32 @@
     "id": "ariens-classic-24",
     "model": "Ariens Classic 24\"",
     "destinations": [
-      { "merchant": "northern_tool", "geo": ["US"], "url": "https://www.northerntool.com/shop/tools/category_ariens-snow-blowers", "priority": 1 },
-      { "merchant": "ace_hardware",   "geo": ["US"], "url": "https://www.acehardware.com/search?query=ariens%2024%20snow%20blower", "priority": 2 },
-      { "merchant": "rona",           "geo": ["CA"], "url": "https://www.rona.ca/en/search?query=ariens%2024%20snow%20blower", "priority": 1 },
-      { "merchant": "amazon",         "geo": ["US"], "url": "https://www.amazon.com/s?k=ariens+24+snow+blower", "priority": 9 },
-      { "merchant": "amazon",         "geo": ["CA"], "url": "https://www.amazon.ca/s?k=ariens+24+snow+blower", "priority": 9 }
+      { "merchant": "amazon",         "geo": ["US"], "url": "https://www.amazon.com/s?k=ariens+24+snow+blower", "priority": 1 },
+      { "merchant": "amazon",         "geo": ["CA"], "url": "https://www.amazon.ca/s?k=ariens+24+snow+blower", "priority": 1 },
+      { "merchant": "northern_tool", "geo": ["US"], "url": "https://www.northerntool.com/shop/tools/category_ariens-snow-blowers", "priority": 2 },
+      { "merchant": "ace_hardware",   "geo": ["US"], "url": "https://www.acehardware.com/search?query=ariens%2024%20snow%20blower", "priority": 3 },
+      { "merchant": "rona",           "geo": ["CA"], "url": "https://www.rona.ca/en/search?query=ariens%2024%20snow%20blower", "priority": 2 }
     ]
   },
   {
     "id": "ego-powerplus-21",
     "model": "EGO Power+ 21\"",
     "destinations": [
-      { "merchant": "ace_hardware", "geo": ["US"], "url": "https://www.acehardware.com/search?query=EGO%20Power%2B%2021%20snow%20blower", "priority": 1 },
-      { "merchant": "rona",         "geo": ["CA"], "url": "https://www.rona.ca/en/search?query=ego%2021%20snow%20blower", "priority": 1 },
-      { "merchant": "amazon",       "geo": ["US"], "url": "https://www.amazon.com/s?k=EGO+Power%2B+21+snow+blower", "priority": 9 },
-      { "merchant": "amazon",       "geo": ["CA"], "url": "https://www.amazon.ca/s?k=EGO+Power%2B+21+snow+blower", "priority": 9 }
+      { "merchant": "amazon",       "geo": ["US"], "url": "https://www.amazon.com/s?k=EGO+Power%2B+21+snow+blower", "priority": 1 },
+      { "merchant": "amazon",       "geo": ["CA"], "url": "https://www.amazon.ca/s?k=EGO+Power%2B+21+snow+blower", "priority": 1 },
+      { "merchant": "ace_hardware", "geo": ["US"], "url": "https://www.acehardware.com/search?query=EGO%20Power%2B%2021%20snow%20blower", "priority": 2 },
+      { "merchant": "rona",         "geo": ["CA"], "url": "https://www.rona.ca/en/search?query=ego%2021%20snow%20blower", "priority": 2 }
     ]
   },
   {
     "id": "budget-24-two-stage",
     "model": "Budget 24\" Two-Stage",
     "destinations": [
-      { "merchant": "tractor_supply", "geo": ["US"], "url": "https://www.tractorsupply.com/search?q=24%20two%20stage%20snow%20blower", "priority": 1 },
-      { "merchant": "ace_hardware",   "geo": ["US"], "url": "https://www.acehardware.com/search?query=24%20two%20stage%20snow%20blower", "priority": 2 },
-      { "merchant": "rona",           "geo": ["CA"], "url": "https://www.rona.ca/en/search?query=24%20two%20stage%20snow%20blower", "priority": 1 },
-      { "merchant": "amazon",         "geo": ["US"], "url": "https://www.amazon.com/s?k=24+two+stage+snow+blower", "priority": 9 },
-      { "merchant": "amazon",         "geo": ["CA"], "url": "https://www.amazon.ca/s?k=24+two+stage+snow+blower", "priority": 9 }
+      { "merchant": "amazon",         "geo": ["US"], "url": "https://www.amazon.com/s?k=24+two+stage+snow+blower", "priority": 1 },
+      { "merchant": "amazon",         "geo": ["CA"], "url": "https://www.amazon.ca/s?k=24+two+stage+snow+blower", "priority": 1 },
+      { "merchant": "tractor_supply", "geo": ["US"], "url": "https://www.tractorsupply.com/search?q=24%20two%20stage%20snow%20blower", "priority": 2 },
+      { "merchant": "ace_hardware",   "geo": ["US"], "url": "https://www.acehardware.com/search?query=24%20two%20stage%20snow%20blower", "priority": 3 },
+      { "merchant": "rona",           "geo": ["CA"], "url": "https://www.rona.ca/en/search?query=24%20two%20stage%20snow%20blower", "priority": 2 }
     ]
   }
 ]
