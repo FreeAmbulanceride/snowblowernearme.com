@@ -1,20 +1,25 @@
+
+<!-- City input setter with safe fallbacks -->
+<script>
 (function setCityInputFromGeo(){
-  // If your code already resolves a city, set the input value
-  if (window.__cityName) {
-    const el = document.getElementById('city-input');
-    if (el) el.value = window.__cityName;
-  } else {
-    // Try to use localStorage fallback from previous geolocation logic
-    try {
-      const cached = localStorage.getItem('sbnm_city_v1');
-      if (cached) {
-        const city = JSON.parse(cached).display;
-        const el = document.getElementById('city-input');
-        if (el && city) el.value = city;
-      }
-    } catch(e){}
-  }
+  try {
+    // 1) If your app already exposes a city string:
+    if (window.__cityName) {
+      const el = document.getElementById('city-input');
+      if (el) el.value = window.__cityName;
+      localStorage.setItem('sbnm_city_v1', JSON.stringify({display: window.__cityName}));
+      return;
+    }
+    // 2) Fallback: prior cached value
+    const cached = localStorage.getItem('sbnm_city_v1');
+    if (cached) {
+      const city = JSON.parse(cached).display;
+      const el = document.getElementById('city-input');
+      if (el && city) el.value = city;
+    }
+  } catch(e) { /* silent */ }
 })();
+</script>
 </main>
 <script type="module">
 /**
@@ -190,19 +195,18 @@ async function resolveCity() {
       <!-- Card 1 -->
       <article class="tile">
         <div class="thumb">
-          <!-- neutral, legal SVG (no Amazon assets) -->
-          <svg viewBox="0 0 640 360" role="img" aria-label="Neutral snow blower illustration">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Neutral snow blower illustration" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
             <defs>
-              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+              <linearGradient id="nx" x1="0" x2="0" y1="0" y2="1">
                 <stop offset="0%" stop-color="#1C2943"/>
                 <stop offset="100%" stop-color="#2A3A5F"/>
               </linearGradient>
             </defs>
-            <rect width="100%" height="100%" fill="url(#g)"/>
-            <circle cx="520" cy="300" r="28" fill="#BFD2FF" opacity=".25"/>
-            <circle cx="440" cy="300" r="28" fill="#BFD2FF" opacity=".25"/>
-            <rect x="120" y="230" width="180" height="44" rx="8" fill="#BFD2FF" opacity=".15"/>
-            <rect x="320" y="210" width="160" height="24" rx="6" fill="#BFD2FF" opacity=".15"/>
+            <rect width="100%" height="100%" fill="url(#nx)"/>
+            <circle cx="500" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+            <circle cx="440" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+            <rect x="110" y="232" width="180" height="40" rx="8" fill="#BFD2FF" opacity=".12"/>
+            <rect x="320" y="210" width="140" height="20" rx="6" fill="#BFD2FF" opacity=".12"/>
           </svg>
         </div>
         <h3>Ariens Classic 24" — two-stage workhorse</h3>
@@ -210,14 +214,24 @@ async function resolveCity() {
           <span class="tag">two-stage</span><span class="tag">self-propelled</span><span class="tag">gravel-safe</span>
         </div>
         <a class="btn btn-primary cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">
-          Check price at Northern Tool →
+          Check price →
         </a>
       </article>
       <!-- Card 2 -->
       <article class="tile">
         <div class="thumb">
-          <svg viewBox="0 0 640 360" role="img" aria-label="Neutral snow blower illustration">
-            <use href="#g"></use>
+          <svg viewBox="0 0 640 360" role="img" aria-label="Neutral snow blower illustration" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="nx" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1C2943"/>
+                <stop offset="100%" stop-color="#2A3A5F"/>
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#nx)"/>
+            <circle cx="500" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+            <circle cx="440" cy="285" r="22" fill="#BFD2FF" opacity=".25"/>
+            <rect x="110" y="232" width="180" height="40" rx="8" fill="#BFD2FF" opacity=".12"/>
+            <rect x="320" y="210" width="140" height="20" rx="6" fill="#BFD2FF" opacity=".12"/>
           </svg>
         </div>
         <h3>EGO Power+ 21" — quiet single-stage electric</h3>
@@ -225,7 +239,7 @@ async function resolveCity() {
           <span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span>
         </div>
         <a class="btn btn-primary cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">
-          Check price at Ace Hardware →
+          Check price →
         </a>
       </article>
     </div>
