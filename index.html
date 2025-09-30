@@ -198,7 +198,6 @@
 
   // 1) Two pinned best sellers (control what always shows)
   window.FEATURED = [
-  {asin:"ASIN1", title:"Ariens Deluxe 28 — Two-stage Gas", image:"/assets/picks/ariens.png", url:"https://www.amazon.com/s?k=ariens+deluxe+28+snow+blower&tag=snowme-20", stage:"two", power:"gas", width:28},
   {asin:"ASIN2", title:"EGO Power+ 21\" — Cordless Single-stage", image:"/assets/picks/ego.png", url:"https://www.amazon.com/s?k=ego+21+inch+snow+blower&tag=snowme-20", stage:"single", power:"battery", width:21},
   {asin:"B00W8YAVRS", title:"Cordless Snow Blower, Electric Snow Thrower 19 Inch, 40V 4.0Ah Battery Powered Snow Removal, 1500W Brushless Motor 25FT Throw Distance for Driveway Patio Sidewalk", image:"/assets/picks/toro.png", url:"https://amzn.to/46GHtQz", stage:"single", power:"battery", width:19},
   {asin:"B0CNY8JQ7B", title:"STEELITE Cordless Snow Blower 2 x 20V, 20-Inch Snow Thrower 850 lbs/Minute Capacity, Includes 2 x 4.0Ah Batteries & Charger, Ideal for Walkways and Driveways, Brushless Motor", image:"/assets/picks/steelite.png", url:"https://amzn.to/4nDdFvx", stage:"single", power:"battery", width:20}
@@ -223,7 +222,7 @@
     </li>`;
 
   // Render pinned first
-  window.FEATURED.forEach(x => grid.insertAdjacentHTML('beforeend', toCard(x)));
+  window.FEATURED.slice(0,3).forEach(x => grid.insertAdjacentHTML('beforeend', toCard(x)));
 
   // 2) Fetch 5 best sellers from your server (PA-API backed), then select 3 not in FEATURED
   function withTimeout(ms, p){ return Promise.race([p, new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')), ms))]); }
