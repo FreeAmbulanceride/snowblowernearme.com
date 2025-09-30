@@ -49,16 +49,12 @@
 
 <main class="container">
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-top">
-      <label class="city-label" for="city-input">Enter your city</label>
-      <input id="city-input" placeholder="Hamilton, ON" inputmode="text" />
-    </div>
-    <h1>Snow blowers near you — in stock & ready</h1>
+  <section class="hero card">
+    <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
     <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for availability.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#top-picks">See Top Picks</a>
-  <a class="btn btn-ghost" href="#" data-action="local-help" target="_blank" rel="noopener">Find Local Help</a>
+      <a class="btn btn-ghost" href="#" data-action="local-help" target="_blank" rel="noopener">Find Local Help</a>
     </div>
   </section>
 
@@ -220,7 +216,7 @@
 <!-- Wire CTAs through the geo-aware resolver (ensures US tag snowme-20, CA tag cansnowme-20) -->
 <script type="module">
   import { wireCTAs } from '/js/link-resolver.js?v=3';
-  import { initCity, initFilters, initLocalHelp } from '/js/ui.js?v=2';
+  import { initCity, initFilters, initLocalHelp } from '/js/ui.js?v=3';
   wireCTAs();
   initCity();
   initFilters();
