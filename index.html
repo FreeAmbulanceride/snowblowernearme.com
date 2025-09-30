@@ -81,7 +81,7 @@
           <li>Chews through deep, wet snow; safe on gravel.</li>
           <li>Easy parts availability in US.</li>
         </ul>
-        <a class="btn btn-primary cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+  <a class="btn btn-primary cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
       </article>
 
       <!-- Card 2 -->
@@ -95,7 +95,7 @@
           <li>Low noise and low maintenance.</li>
           <li>Instant starts in cold.</li>
         </ul>
-        <a class="btn btn-primary cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+  <a class="btn btn-primary cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
       </article>
 
       <!-- Card 3 -->
@@ -109,7 +109,7 @@
           <li>Affordable step into two-stage power.</li>
           <li>Good for moderate snowfall.</li>
         </ul>
-        <a class="btn btn-primary cta" data-model="Budget 24&quot; Two-Stage" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+  <a class="btn btn-primary cta" data-id="budget-24-two-stage" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
       </article>
     </div>
 
@@ -124,9 +124,9 @@
           <th style="text-align:right;padding:10px 12px">Link</th>
         </tr></thead>
         <tbody>
-          <tr><td style="padding:10px 12px">Ariens Classic 24"</td><td style="padding:10px 12px">Two-stage</td><td style="padding:10px 12px">24"</td><td style="padding:10px 12px">Deep/wet snow, gravel</td><td style="padding:10px 12px;text-align:right"><a class="cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
-          <tr><td style="padding:10px 12px">EGO Power+ 21"</td><td style="padding:10px 12px">Single-stage (battery)</td><td style="padding:10px 12px">21"</td><td style="padding:10px 12px">Paved, low noise</td><td style="padding:10px 12px;text-align:right"><a class="cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
-          <tr><td style="padding:10px 12px">Budget 24" Two-Stage</td><td style="padding:10px 12px">Two-stage</td><td style="padding:10px 12px">24"</td><td style="padding:10px 12px">Starter value</td><td style="padding:10px 12px;text-align:right"><a class="cta" data-model="Budget 24&quot; Two-Stage" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
+          <tr><td style="padding:10px 12px">Ariens Classic 24"</td><td style="padding:10px 12px">Two-stage</td><td style="padding:10px 12px">24"</td><td style="padding:10px 12px">Deep/wet snow, gravel</td><td style="padding:10px 12px;text-align:right"><a class="cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
+          <tr><td style="padding:10px 12px">EGO Power+ 21"</td><td style="padding:10px 12px">Single-stage (battery)</td><td style="padding:10px 12px">21"</td><td style="padding:10px 12px">Paved, low noise</td><td style="padding:10px 12px;text-align:right"><a class="cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
+          <tr><td style="padding:10px 12px">Budget 24" Two-Stage</td><td style="padding:10px 12px">Two-stage</td><td style="padding:10px 12px">24"</td><td style="padding:10px 12px">Starter value</td><td style="padding:10px 12px;text-align:right"><a class="cta" data-id="budget-24-two-stage" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -183,8 +183,14 @@
 
 <!-- Wire CTAs through the geo-aware resolver (ensures US tag snowme-20, CA tag cansnowme-20) -->
 <script type="module">
-  import { wireCTAs } from '/js/link-resolver.js';
-  wireCTAs();
+  import { wireCTAs } from '/js/link-resolver.js?v=3';
+  wireCTAs().catch(console.error);
+</script>
+<script>
+  // Optional non-module fallback if module import fails for any reason
+  if (!('noModule' in HTMLScriptElement.prototype)) {
+    window.__wireCTAs && window.__wireCTAs();
+  }
 </script>
 
 </body>
