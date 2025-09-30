@@ -1,3 +1,11 @@
+/* Filters and chips for product filtering */
+.filters{display:grid;gap:8px;margin:8px 0 12px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#0E1A2B;color:#E2EEFF;border:1px solid rgba(147,197,253,.25);
+  padding:6px 10px;border-radius:999px;cursor:pointer;font-weight:600}
+.chip.is-active{background:#F59E0B;color:#0B1220;border-color:transparent}
+.chip:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.tile[hidden]{display:none !important}
 /* Compare component (no inline styles) */
 .compare {
   margin-top: 18px;

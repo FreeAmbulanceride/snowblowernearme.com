@@ -58,7 +58,7 @@
     <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for availability.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#top-picks">See Top Picks</a>
-      <a class="btn btn-ghost" href="#local-help">Find Local Help</a>
+  <a class="btn btn-ghost" href="#" data-action="local-help" target="_blank" rel="noopener">Find Local Help</a>
     </div>
   </section>
 
@@ -71,10 +71,29 @@
   <section id="top-picks">
     <h2 class="section-title">Today’s Top Picks</h2>
     <p class="section-kicker">Choose by driveway type, snow depth, and noise tolerance.</p>
+    <div class="filters" aria-label="Filter picks">
+      <!-- Driveway type -->
+      <div class="chip-row" role="group" aria-label="Driveway type">
+        <button class="chip is-active" data-group="driveway" data-value="paved">Paved</button>
+        <button class="chip" data-group="driveway" data-value="gravel">Gravel</button>
+        <button class="chip" data-group="driveway" data-value="mixed">Mixed</button>
+      </div>
+      <!-- Snow depth -->
+      <div class="chip-row" role="group" aria-label="Typical snow depth">
+        <button class="chip is-active" data-group="depth" data-value="light">Light</button>
+        <button class="chip" data-group="depth" data-value="moderate">Moderate</button>
+        <button class="chip" data-group="depth" data-value="deep">Deep</button>
+      </div>
+      <!-- Noise tolerance -->
+      <div class="chip-row" role="group" aria-label="Noise tolerance">
+        <button class="chip is-active" data-group="noise" data-value="low">Low</button>
+        <button class="chip" data-group="noise" data-value="ok">OK with noise</button>
+      </div>
+    </div>
 
     <div class="grid">
       <!-- Card 1 -->
-      <article class="tile">
+  <article class="tile" data-driveway="gravel" data-depth="deep" data-noise="ok">
         <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
         <h3>Ariens Classic 24" — two-stage workhorse</h3>
         <div class="meta">
@@ -88,7 +107,7 @@
       </article>
 
       <!-- Card 2 -->
-      <article class="tile">
+  <article class="tile" data-driveway="paved" data-depth="light" data-noise="low">
         <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
         <h3>EGO Power+ 21" — quiet single-stage electric</h3>
         <div class="meta">
@@ -102,7 +121,7 @@
       </article>
 
       <!-- Card 3 -->
-      <article class="tile">
+  <article class="tile" data-driveway="paved" data-depth="moderate" data-noise="ok">
         <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
         <h3>Budget 24" Two-Stage — starter value</h3>
         <div class="meta">
@@ -201,7 +220,11 @@
 <!-- Wire CTAs through the geo-aware resolver (ensures US tag snowme-20, CA tag cansnowme-20) -->
 <script type="module">
   import { wireCTAs } from '/js/link-resolver.js?v=3';
-  wireCTAs().catch(console.error);
+  import { initCity, initFilters, initLocalHelp } from '/js/ui.js?v=2';
+  wireCTAs();
+  initCity();
+  initFilters();
+  initLocalHelp();
 </script>
 <script>
   // Optional non-module fallback if module import fails for any reason
