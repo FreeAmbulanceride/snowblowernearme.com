@@ -65,70 +65,71 @@
 
   <!-- PICKS -->
   <section id="top-picks">
-    <h2 class="section-title">Today’s Top Picks</h2>
-    <p class="section-kicker">Choose by driveway type, snow depth, and noise tolerance.</p>
-    <div class="filters" aria-label="Filter picks">
-      <!-- Driveway type -->
-      <div class="chip-row" role="group" aria-label="Driveway type">
-        <button class="chip is-active" data-group="driveway" data-value="paved">Paved</button>
-        <button class="chip" data-group="driveway" data-value="gravel">Gravel</button>
-        <button class="chip" data-group="driveway" data-value="mixed">Mixed</button>
-      </div>
-      <!-- Snow depth -->
-      <div class="chip-row" role="group" aria-label="Typical snow depth">
-        <button class="chip is-active" data-group="depth" data-value="light">Light</button>
-        <button class="chip" data-group="depth" data-value="moderate">Moderate</button>
-        <button class="chip" data-group="depth" data-value="deep">Deep</button>
-      </div>
-      <!-- Noise tolerance -->
-      <div class="chip-row" role="group" aria-label="Noise tolerance">
-        <button class="chip is-active" data-group="noise" data-value="low">Low</button>
-        <button class="chip" data-group="noise" data-value="ok">OK with noise</button>
-      </div>
-    </div>
-
-    <div class="grid">
-      <!-- Card 1 -->
-  <article class="tile" data-driveway="gravel" data-depth="deep" data-noise="ok">
-        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
-        <h3>Ariens Classic 24" — two-stage workhorse</h3>
-        <div class="meta">
-          <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">steel auger</span><span class="tag">self-propelled</span>
+  <div class="is-hidden">
+      <p class="section-kicker">Choose by driveway type, snow depth, and noise tolerance.</p>
+      <div class="filters" aria-label="Filter picks">
+        <!-- Driveway type -->
+        <div class="chip-row" role="group" aria-label="Driveway type">
+          <button class="chip is-active" data-group="driveway" data-value="paved">Paved</button>
+          <button class="chip" data-group="driveway" data-value="gravel">Gravel</button>
+          <button class="chip" data-group="driveway" data-value="mixed">Mixed</button>
         </div>
-        <ul class="pros">
-          <li>Chews through deep, wet snow; safe on gravel.</li>
-          <li>Easy parts availability in US.</li>
-        </ul>
-  <a class="btn btn-primary cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
-      </article>
-
-      <!-- Card 2 -->
-  <article class="tile" data-driveway="paved" data-depth="light" data-noise="low">
-        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
-        <h3>EGO Power+ 21" — quiet single-stage electric</h3>
-        <div class="meta">
-          <span class="tag">21" width</span><span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span>
+        <!-- Snow depth -->
+        <div class="chip-row" role="group" aria-label="Typical snow depth">
+          <button class="chip is-active" data-group="depth" data-value="light">Light</button>
+          <button class="chip" data-group="depth" data-value="moderate">Moderate</button>
+          <button class="chip" data-group="depth" data-value="deep">Deep</button>
         </div>
-        <ul class="pros">
-          <li>Low noise and low maintenance.</li>
-          <li>Instant starts in cold.</li>
-        </ul>
-  <a class="btn btn-primary cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
-      </article>
-
-      <!-- Card 3 -->
-  <article class="tile" data-driveway="paved" data-depth="moderate" data-noise="ok">
-        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
-        <h3>Budget 24" Two-Stage — starter value</h3>
-        <div class="meta">
-          <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">starter</span>
+        <!-- Noise tolerance -->
+        <div class="chip-row" role="group" aria-label="Noise tolerance">
+          <button class="chip is-active" data-group="noise" data-value="low">Low</button>
+          <button class="chip" data-group="noise" data-value="ok">OK with noise</button>
         </div>
-        <ul class="pros">
-          <li>Affordable step into two-stage power.</li>
-          <li>Good for moderate snowfall.</li>
-        </ul>
-  <a class="btn btn-primary cta" data-id="budget-24-two-stage" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
-      </article>
+      </div>
+
+      <div class="grid">
+        <!-- Card 1 -->
+        <article class="tile" data-driveway="gravel" data-depth="deep" data-noise="ok">
+          <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
+          <h3>Ariens Classic 24" — two-stage workhorse</h3>
+          <div class="meta">
+            <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">steel auger</span><span class="tag">self-propelled</span>
+          </div>
+          <ul class="pros">
+            <li>Chews through deep, wet snow; safe on gravel.</li>
+            <li>Easy parts availability in US.</li>
+          </ul>
+          <a class="btn btn-primary cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="tile" data-driveway="paved" data-depth="light" data-noise="low">
+          <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
+          <h3>EGO Power+ 21" — quiet single-stage electric</h3>
+          <div class="meta">
+            <span class="tag">21" width</span><span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span>
+          </div>
+          <ul class="pros">
+            <li>Low noise and low maintenance.</li>
+            <li>Instant starts in cold.</li>
+          </ul>
+          <a class="btn btn-primary cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="tile" data-driveway="paved" data-depth="moderate" data-noise="ok">
+          <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
+          <h3>Budget 24" Two-Stage — starter value</h3>
+          <div class="meta">
+            <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">starter</span>
+          </div>
+          <ul class="pros">
+            <li>Affordable step into two-stage power.</li>
+            <li>Good for moderate snowfall.</li>
+          </ul>
+          <a class="btn btn-primary cta" data-id="budget-24-two-stage" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+        </article>
+      </div>
     </div>
 
     <!-- Simple compare table -->
