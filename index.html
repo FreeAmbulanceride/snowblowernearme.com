@@ -1,3 +1,91 @@
+</main>
+<script type="module">
+/**
+ * Replace this with your existing reverse-geocoder if you have one.
+ * Must resolve to { city: "Hamilton", region: "ON", country: "CA" } (any subset is fine).
+ */
+async function getCityFromCoords(lat, lon) {
+  // Example adapter call:
+  // return fetch(`/api/revgeo?lat=${lat}&lon=${lon}`).then(r=>r.json());
+  // For now, return a stub so site still functions if API is offline.
+  return { city: null, region: null, country: null };
+}
+
+/** Optional: IP-based fallback you might already run server-side */
+async function getCityFromIP() {
+  // If you have a server-rendered guess, expose it on window.__ipCity
+  return window.__ipCity || null;
+}
+
+function roundCoord(n){ return Math.round(n * 100) / 100; } // ~1km
+
+async function resolveCity() {
+  const badge = document.getElementById('city-badge');
+  const LS_KEY = 'sbnm_city_v1';
+  try {
+    // 1) Cached city string
+    const cached = localStorage.getItem(LS_KEY);
+    if (cached) return JSON.parse(cached);
+
+    // 2) Geolocation (user permission)
+    const pos = await new Promise((res, rej) => {
+      const id = navigator.geolocation?.getCurrentPosition(
+        p => res(p),
+        err => rej(err),
+        { enableHighAccuracy:false, timeout:5000, maximumAge: 600000 }
+      );
+      if (!navigator.geolocation) rej(new Error('no-geolocation'));
+    });
+
+    const lat = roundCoord(pos.coords.latitude);
+    const lon = roundCoord(pos.coords.longitude);
+    const place = await getCityFromCoords(lat, lon);
+    const best = place?.city || place?.region || place?.country;
+
+    if (best) {
+      const out = { display: best, lat, lon };
+      localStorage.setItem(LS_KEY, JSON.stringify(out));
+      return out;
+    }
+    throw new Error('revgeo-empty');
+  } catch (_) {
+    // 3) IP fallback
+    const ipCity = await getCityFromIP();
+    if (ipCity) return { display: ipCity, lat:null, lon:null };
+
+    // 4) Manual fallback — show a tiny chooser
+    return { display: null, lat:null, lon:null };
+  }
+}
+
+(async function initCityBadge(){
+  const badge = document.getElementById('city-badge');
+  const res = await resolveCity();
+
+  if (res.display) {
+    badge.textContent = `${res.display} — detected`;
+  } else {
+    badge.innerHTML = `
+      <label for="city-input" class="sr-only">Enter your city</label>
+      <input id="city-input" placeholder="Enter your city" style="background:#0E1A2B;color:#cfe1ff;border:1px solid rgba(147,197,253,.3);padding:6px 10px;border-radius:999px;">`;
+    const input = document.getElementById('city-input');
+    input.addEventListener('change', ()=>{
+      const city = input.value.trim();
+      if (city) {
+        badge.textContent = `${city} — set`;
+        localStorage.setItem('sbnm_city_v1', JSON.stringify({display:city}));
+      }
+    });
+  }
+
+  // OPTIONAL: update “Local Help” anchor to include city query
+  const lh = document.querySelector('a[href="#local-help"]');
+  if (lh && res.display) lh.href = `#local-help?city=${encodeURIComponent(res.display)}`;
+
+  // OPTIONAL: trigger a light personalization (e.g. reorder top picks)
+  document.dispatchEvent(new CustomEvent('city:resolved', { detail: res }));
+})();
+</script>
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,89 +140,60 @@
   <!-- Cloudflare Web Analytics can be enabled automatically for proxied zones in dashboard; script not required. -->
 </head>
 <body>
-<header class="site">
-  <div class="container inner">
-    <a class="logo" href="/"><img src="/assets/logo.svg" alt="" width="24" height="24"> snowblowernearme<span>.com</span></a>
-    <nav class="sticky-cta">
-      <a class="btn btn--primary" href="#top-picks">Buy now</a>
-      <a class="btn btn--secondary" href="#local-services">Get local help</a>
-    </nav>
-    <p class="disclosure">
-      As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.
-    </p>
+<header class="site-header">
+  <div class="site-brand">
+    <div class="logo" aria-hidden="true"></div>
+    <div class="name">snowblowernearme.com</div>
   </div>
+  <p class="disclosure">
+    As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.
+  </p>
 </header>
 
-<main>
+<main class="container">
   <section class="hero">
-    <div class="container">
-      <h1>Snow blowers in <span data-city>your city</span>: In-stock picks & local options</h1>
-      <p class="sub">Quick compare of the best single- and two-stage models, plus a fast rental/repair form.</p>
-        <p class="note-trust">Some links are affiliate linksif you buy, we may earn a commission at no extra cost to you.</p>
-      <div class="actions">
-        <a class="btn btn--primary" href="#top-picks">See Top Picks</a>
-        <a class="btn btn--secondary" href="#local-services">Find Local Help</a>
-      </div>
+    <span class="badge" id="city-badge" aria-live="polite">Detecting your city…</span>
+    <h1>Snow blowers near you — in stock & ready</h1>
+    <p class="sub">Quick compare of the best single- and two-stage options, plus a fast rental/repair finder. Neutral visuals, no scraped prices—click through to see current availability.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#top-picks">See Top Picks</a>
+      <a class="btn btn-ghost" href="#local-help">Find Local Help</a>
     </div>
   </section>
 
-  <section id="top-picks" class="section">
-    <div class="container">
-      <h2>Today's Top 5 Picks</h2>
-        <section class="grid">
-          <article class="tile">
-            <h2>Best for deep, wet snow (2-stage)</h2>
-            <p class="meta">Steel auger  self-propelled  gravel-safe</p>
-            <a class="cta" data-model="Ariens Classic 24\"" rel="sponsored nofollow noopener" target="_blank">
-              Check price at Northern Tool 
-            </a>
-          </article>
-          <article class="tile">
-            <h2>Best low-noise (single-stage electric)</h2>
-            <p class="meta">Battery  paved driveways  quick starts</p>
-            <a class="cta" data-model="EGO Power+ 21\"" rel="sponsored nofollow noopener" target="_blank">
-              Check price at Ace Hardware 
-            </a>
-          </article>
-        </section>
-        <script type="module">
-          import { bestLinkFor } from '/js/link-resolver.js';
-          document.querySelectorAll('.cta').forEach(a=>{
-            const url = bestLinkFor(a.dataset.model) || 'https://www.amazon.com/s?k=snow+blower&tag=snowme-20';
-            a.href = url;
-            a.addEventListener('click', ()=>console.log('affiliate_click',{model:a.dataset.model, url}));
-          });
-        </script>
-        <ul class="card-grid" id="top-grid" aria-label="Top snow blowers"></ul>
+  <section id="top-picks">
+    <h2 class="section-title">Today’s Top Picks</h2>
+    <p class="section-kicker">Curated for typical Canadian/US winter conditions; choose by driveway type, snow depth, and noise tolerance.</p>
+    <div class="grid">
+      <article class="tile">
+        <div class="thumb" role="img" aria-label="Neutral illustration for two-stage snow blower"></div>
+        <h3>Ariens Classic 24" — two-stage workhorse</h3>
+        <div class="meta">
+          <span class="tag">two-stage</span><span class="tag">self-propelled</span><span class="tag">gravel-safe</span>
+        </div>
+        <div class="spacer"></div>
+        <a class="btn btn-primary cta" data-model="Ariens Classic 24&quot;" rel="sponsored nofollow noopener" target="_blank">Check price at Northern Tool →</a>
+      </article>
+      <article class="tile">
+        <div class="thumb" role="img" aria-label="Neutral illustration for single-stage electric snow blower"></div>
+        <h3>EGO Power+ 21" — quiet single-stage electric</h3>
+        <div class="meta">
+          <span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span>
+        </div>
+        <div class="spacer"></div>
+        <a class="btn btn-primary cta" data-model="EGO Power+ 21&quot;" rel="sponsored nofollow noopener" target="_blank">Check price at Ace Hardware →</a>
+      </article>
+      <!-- add more cards as needed -->
     </div>
   </section>
 
-  <section class="section compare">
-    <div class="container">
-      <h2>Quick Compare</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Model Type</th><th>Width</th><th>Power</th><th>Best for</th><th>Buy</th></tr></thead>
-          <tbody>
-            <tr><td>Two-stage</td><td>28"</td><td>Gas</td><td>Heavy snow, long driveways</td>
-              <td><a class="btn btn--primary small" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Table1')" href="https://www.amazon.com/s?k=two+stage+28+inch+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
-            <tr><td>Single-stage</td><td>21"</td><td>Battery</td><td>Urban homes, quick clears</td>
-              <td><a class="btn btn--primary small" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Table2')" href="https://www.amazon.com/s?k=cordless+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
-            <tr><td>Single-stage</td><td>21"</td><td>Gas</td><td>Budget, medium snowfall</td>
-              <td><a class="btn btn--primary small" rel="sponsored nofollow noopener" target="_blank" onclick="trackClick('Table3')" href="https://www.amazon.com/s?k=single+stage+snow+blower&amp;tag=snowme-20">Buy</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+  <!-- Compare table and other sections can be re-added below as needed -->
 
-  <section id="local-services" class="section lead">
-    <div class="container">
-      <h2>Find local rental or repair</h2>
-      <p>Need a rental today or fast repair? Tell us your city and we will email options.</p>
-      <p><a class="btn btn--secondary" href="https://forms.gle/JywyQHGHJyi4xPUR7">Open the quick request form</a></p>
-      <p class="alt">Or email: <a href="mailto:snownearme@gmail.com">snownearme@gmail.com</a></p>
-    </div>
+  <section id="local-help" class="lead">
+    <h2 class="section-title">Find local rental or repair</h2>
+    <p>Need a rental today or fast repair? Tell us your city and we will email options.</p>
+    <p><a class="btn btn-ghost" href="https://forms.gle/JywyQHGHJyi4xPUR7">Open the quick request form</a></p>
+    <p class="alt">Or email: <a href="mailto:snownearme@gmail.com">snownearme@gmail.com</a></p>
   </section>
 
   <section class="section weather">
@@ -278,19 +337,11 @@
   <a id="cta-best" rel="sponsored nofollow noopener" target="_blank">See today’s price</a>
 </div>
 <script type="module">
-const manifest = await fetch('/link_manifest.json').then(r=>r.json());
-function bestLinkForFirstTile(){
-  // You can change this to pick by geo, merchant EPC, or inventory
-  const item = manifest[0]; // first top-pick for now
-  const sorted = [...item.destinations].sort((a,b)=>a.priority-b.priority);
-  return sorted[0]?.url || 'https://www.amazon.com/s?k=snow+blower&tag=snowme-20';
-}
-const best = bestLinkForFirstTile();
-const cta = document.getElementById('cta-best');
-cta.href = best;
-cta.addEventListener('click', () => {
-  // minimal analytics; wire to Gtag or Plausible later
-  console.log('affiliate_click', {merchant: new URL(best).hostname});
+import { bestLinkFor } from '/js/link-resolver.js';
+document.querySelectorAll('.cta').forEach(async a=>{
+  const url = await bestLinkFor(a.dataset.model) || 'https://www.amazon.com/s?k=snow+blower&tag=snowme-20';
+  a.href = url;
+  a.addEventListener('click', ()=>console.log('affiliate_click',{model:a.dataset.model,url}));
 });
 </script>
 <script>
