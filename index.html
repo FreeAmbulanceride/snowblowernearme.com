@@ -40,6 +40,97 @@
   <!-- Optional storm banner (off by default, enable via ?storm=1) -->
   <div id="storm" hidden class="storm">Storm approaching? Order now to avoid stockouts and delivery delays →</div>
 
+<script>
+(async function stormAutoRibbon(){
+  const RIBBON_ID = 'storm';                 // <div id="storm" hidden>…</div>
+  const CACHE_KEY = 'storm_check_v1';
+  const CACHE_TTL_MS = 6 * 60 * 60 * 1000;   // 6 hours
+
+  // 0) Skip if query param already forces it
+  if (location.search.includes('storm=1')) { 
+    const el = document.getElementById(RIBBON_ID); if (el) el.hidden = false; 
+    return;
+  }
+
+  // 1) Use cached decision to avoid extra calls
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
+    if (cached && (Date.now() - cached.t) < CACHE_TTL_MS) {
+      if (cached.on) { const el = document.getElementById(RIBBON_ID); if (el) el.hidden = false; }
+      return;
+    }
+  } catch(_) {}
+
+  // 2) Get user location (coarse); fall back to “city” you already resolved
+  function getApprox() {
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) return resolve(null);
+      navigator.geolocation.getCurrentPosition(
+        p => resolve({lat:p.coords.latitude, lon:p.coords.longitude}),
+        _ => resolve(null),
+        {maximumAge: 6e5, timeout: 4000}
+      );
+    });
+  }
+  let loc = await getApprox();
+  if (!loc) {
+    try {
+      const cachedCity = JSON.parse(localStorage.getItem('sbnm_city_v1')||'null');
+      // Optional: map a few popular cities to lat/lon as a tiny fallback table
+    } catch(_){}
+  }
+  if (!loc) return; // Give up quietly; site still works.
+
+  const {lat, lon} = loc;
+
+  // 3) Race 2 signal sources: alerts + forecast (lightweight, no keys)
+  function withTimeout(ms, p){ return Promise.race([p, new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms))]); }
+
+  // 3a) Alerts
+  async function hasAlert() {
+    try {
+      // US: NWS has CORS and point-based alerts
+      if (navigator.language.toLowerCase().endsWith('-us') || (Intl.DateTimeFormat().resolvedOptions().timeZone||'').includes('America/')) {
+        const r = await withTimeout(5000, fetch(`https://api.weather.gov/alerts/active?point=${lat},${lon}`, {headers:{'Accept':'application/geo+json'}}));
+        if (!r.ok) return false;
+        const j = await r.json();
+        return (j.features && j.features.length > 0);
+      }
+      // Canada: Government CAP feed (national); simple heuristic via province feed fallback
+      const r = await withTimeout(6000, fetch('https://dd.weather.gc.ca/alerts/cap/Canada-cap-en.xml'));
+      if (!r.ok) return false;
+      const t = await r.text();
+      // crude match for “Warning” or “Snowfall”/“Winter Storm”
+      return /Warning|Snowfall|Winter Storm|Blizzard|Freezing Rain/i.test(t);
+    } catch(_){ return false; }
+  }
+
+  // 3b) Forecast spike (Open-Meteo; free, CORS)
+  async function hasSnowSpike() {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=snowfall,wind_speed_10m&forecast_days=3`;
+      const r = await withTimeout(5000, fetch(url));
+      if (!r.ok) return false;
+      const j = await r.json();
+      const snow = (j.hourly?.snowfall||[]).reduce((a,b)=>a+(+b||0),0); // cm over 72h
+      const windy = (j.hourly?.wind_speed_10m||[]).some(v => (+v||0) >= 40); // km/h
+      return (snow >= 10) || windy;
+    } catch(_){ return false; }
+  }
+
+  const [alertOn, spikeOn] = await Promise.all([hasAlert(), hasSnowSpike()]);
+  const shouldShow = !!(alertOn || spikeOn);
+
+  // 4) Persist decision & flip ribbon
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({on:shouldShow, t:Date.now()})); } catch(_){}
+  if (shouldShow) {
+    const el = document.getElementById(RIBBON_ID);
+    if (el) el.hidden = false;
+  }
+})();
+</script>
+
+
   <!-- HERO -->
   <section class="hero container card">
     <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
