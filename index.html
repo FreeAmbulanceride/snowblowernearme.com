@@ -3,243 +3,224 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Snow blowers near you — in stock & ready</title>
-  <meta name="description" content="Quick compare of the best single- and two-stage snow blowers near you. Neutral visuals, no scraped prices—click through for availability." />
+  <title>Snow blowers near your area — in stock & ready</title>
+  <meta name="description" content="Fast, clean picks for snow blowers that are usually in stock in the US & Canada. No scraped prices. Click through to check live availability." />
+
+  <!-- Perf hints for Amazon handoff -->
   <link rel="preconnect" href="https://www.amazon.com">
   <link rel="preconnect" href="https://www.amazon.ca">
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="/assets/styles.css?v=1" />
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand">
-      <span class="dot" aria-hidden="true"></span>
-      <a href="/" class="name" style="color:inherit;text-decoration:none;font-weight:800">snowblowernearme.com</a>
+  <!-- Site-wide disclosure (one time, above first CTA) -->
+  <p class="top-disclosure container">
+    As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.
+  </p>
+
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/logo.svg" width="24" height="24" alt="" />
+        <span class="name">snowblowernearme<span class="dot">.</span>com</span>
+      </a>
+      <nav class="main-nav">
+        <a href="/gravel/">Gravel</a>
+        <a href="/quiet-battery/">Quiet/Battery</a>
+        <a href="/steep-driveways/">Steep/Long</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
     </div>
-    <nav class="nav">
-      <a href="/gravel/">Gravel</a>
-      <a href="/quiet-battery/">Quiet/Battery</a>
-      <a href="/steep-driveways/">Steep/Long</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-    </nav>
-  </div>
-  <p class="container disclosure">As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.</p>
-</header>
+  </header>
 
-<!-- Optional storm ribbon (show via ?storm=1) -->
-<div id="storm-ribbon">Major snow event incoming: See updated picks below ↓</div>
+  <!-- Optional storm banner (off by default, enable via ?storm=1) -->
+  <div id="storm" hidden class="storm">Storm approaching? Order now to avoid stockouts and delivery delays →</div>
 
-<main>
   <!-- HERO -->
-  <section class="hero container">
+  <section class="hero container card">
     <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
-    <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for availability.</p>
+    <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for live availability.</p>
     <div class="actions">
       <a class="btn btn--primary" href="#top-picks">See top picks</a>
       <a class="btn btn--ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" target="_blank" rel="noopener">Request local rental/repair</a>
     </div>
   </section>
 
-  <section class="container section">
-    <p class="small">Updated <time datetime="2025-09-30">September 30, 2025</time> · Tested for heavy/wet snow & powder, paved vs gravel driveways, and cold starts.</p>
+  <!-- Updated note -->
+  <section class="container small-note">
+    Updated <time datetime="2025-09-30">September 30, 2025</time> · Tested for heavy/wet snow &amp; powder, paved vs gravel driveways, and cold starts. US/Canada routing sends you to the right Amazon store with the correct tag.
   </section>
 
-  <!-- Optional filter chips (purely cosmetic unless you wire JS later) -->
-  <section class="container filters" aria-label="Filter suggestions">
-    <div class="chip-row">
-      <button class="chip" type="button">Paved</button>
-      <button class="chip" type="button">Gravel</button>
-      <button class="chip" type="button">Mixed</button>
-    </div>
-    <div class="chip-row">
-      <button class="chip" type="button">Light</button>
-      <button class="chip" type="button">Moderate</button>
-      <button class="chip" type="button">Deep</button>
-      <button class="chip" type="button">Low</button>
-      <button class="chip" type="button">OK with noise</button>
-    </div>
-  </section>
-
-  <!-- TOP PICKS -->
+  <!-- PICKS -->
   <section id="top-picks" class="container section">
-    <h2 style="font-size:var(--fs-h2);margin:0 0 12px">Today’s Top Picks</h2>
+    <h2 class="section-title">Today’s Top Picks</h2>
 
-    <div class="grid">
+    <ul class="card-grid">
       <!-- Card 1 -->
-      <article class="tile">
+      <li class="card">
         <div class="thumb">
-          <img src="/assets/picks/ariens.png" alt="Ariens Classic 24 snow blower" loading="lazy" width="640" height="400">
+          <img src="/assets/picks/ariens.png" width="640" height="360" alt="Ariens Classic 24 snow blower" loading="lazy" />
         </div>
-        <h3>Ariens Classic 24" — two-stage workhorse</h3>
-        <div class="meta">
-          <span class="tag">24" width</span>
-          <span class="tag">two-stage</span>
-          <span class="tag">steel auger</span>
-          <span class="tag">self-propelled</span>
-        </div>
+        <h3>Ariens Classic 24&quot; — two-stage workhorse</h3>
+        <ul class="specs">
+          <li>24&quot; width</li><li>two-stage</li><li>steel auger</li><li>self-propelled</li>
+        </ul>
         <ul class="pros">
-          <li>Chews through deep, wet snow; safe on gravel.</li>
-          <li>Easy parts availability in US/Canada.</li>
+          <li>Chews through deep, wet snow; safer on gravel.</li>
+          <li>Parts availability in US/Canada is solid.</li>
         </ul>
         <a class="btn btn--primary cta" data-amz-q="Ariens Classic 24 snow blower">Check price on Amazon →</a>
-      </article>
+      </li>
 
       <!-- Card 2 -->
-      <article class="tile">
+      <li class="card">
         <div class="thumb">
-          <img src="/assets/picks/ego.png" alt="EGO Power+ 21” single-stage" loading="lazy" width="640" height="400">
+          <img src="/assets/picks/ego.png" width="640" height="360" alt="EGO Power+ 21 snow blower" loading="lazy" />
         </div>
-        <h3>EGO Power+ 21" — quiet single-stage electric</h3>
-        <div class="meta">
-          <span class="tag">21" width</span>
-          <span class="tag">single-stage</span>
-          <span class="tag">battery</span>
-        </div>
+        <h3>EGO Power+ 21&quot; — quiet single-stage electric</h3>
+        <ul class="specs">
+          <li>21&quot; width</li><li>single-stage</li><li>battery</li>
+        </ul>
         <ul class="pros">
-          <li>Low noise and low maintenance.</li>
-          <li>Instant starts in cold.</li>
+          <li>Low noise, low upkeep; instant starts in cold.</li>
         </ul>
         <a class="btn btn--primary cta" data-amz-q="EGO Power+ 21 snow blower">Check price on Amazon →</a>
-      </article>
+      </li>
 
       <!-- Card 3 -->
-      <article class="tile">
+      <li class="card">
         <div class="thumb">
-          <img src="/assets/picks/toro.png" alt="Budget 24 two-stage" loading="lazy" width="640" height="400">
+          <img src="/assets/picks/toro.png" width="640" height="360" alt="Budget 24 two-stage snow blower" loading="lazy" />
         </div>
-        <h3>Budget 24" Two-Stage — starter value</h3>
-        <div class="meta">
-          <span class="tag">24" width</span>
-          <span class="tag">two-stage</span>
-          <span class="tag">starter</span>
-        </div>
+        <h3>Budget 24&quot; Two-Stage — starter value</h3>
+        <ul class="specs">
+          <li>24&quot; width</li><li>two-stage</li><li>starter</li>
+        </ul>
         <ul class="pros">
-          <li>Affordable step into two-stage power.</li>
-          <li>Good for moderate snowfall.</li>
+          <li>Affordable step into two-stage power for moderate snowfall.</li>
         </ul>
         <a class="btn btn--primary cta" data-amz-q="24 inch two stage snow blower">Check price on Amazon →</a>
-      </article>
-    </div>
+      </li>
+    </ul>
 
-    <!-- Compare (mobile-friendly) -->
-    <div class="compare" style="margin-top:18px">
+    <!-- Compare table -->
+    <div class="compare">
       <table>
         <thead>
-          <tr>
-            <th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th>Link</th>
-          </tr>
+          <tr><th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th class="ta-right">Link</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td data-label="Model">Ariens Classic 24"</td>
-            <td data-label="Stage">Two-stage</td>
-            <td data-label="Width">24"</td>
-            <td data-label="Best for">Deep/wet snow, gravel</td>
-            <td data-label="Link"><a class="btn btn--primary cta" data-amz-q="Ariens Classic 24 snow blower">Check availability</a></td>
+            <td>Ariens Classic 24&quot;</td><td>Two-stage</td><td>24&quot;</td><td>Deep/wet snow, gravel</td>
+            <td class="ta-right"><a class="cta link" data-amz-q="Ariens Classic 24 snow blower">Check availability</a></td>
           </tr>
           <tr>
-            <td data-label="Model">EGO Power+ 21"</td>
-            <td data-label="Stage">Single-stage (battery)</td>
-            <td data-label="Width">21"</td>
-            <td data-label="Best for">Paved, low noise</td>
-            <td data-label="Link"><a class="btn btn--primary cta" data-amz-q="EGO Power+ 21 snow blower">Check availability</a></td>
+            <td>EGO Power+ 21&quot;</td><td>Single-stage (battery)</td><td>21&quot;</td><td>Paved, low noise</td>
+            <td class="ta-right"><a class="cta link" data-amz-q="EGO Power+ 21 snow blower">Check availability</a></td>
           </tr>
           <tr>
-            <td data-label="Model">Budget 24" Two-Stage</td>
-            <td data-label="Stage">Two-stage</td>
-            <td data-label="Width">24"</td>
-            <td data-label="Best for">Starter value</td>
-            <td data-label="Link"><a class="btn btn--primary cta" data-amz-q="24 inch two stage snow blower">Check availability</a></td>
+            <td>Budget 24&quot; Two-Stage</td><td>Two-stage</td><td>24&quot;</td><td>Starter value</td>
+            <td class="ta-right"><a class="cta link" data-amz-q="24 inch two stage snow blower">Check availability</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- Local help -->
-  <section class="container section">
-    <h2 style="font-size:var(--fs-h2);margin:0 0 8px">Find local rental or repair</h2>
-    <p class="small">Need a rental today or quick repair? Use the official store locators or request help.</p>
-    <div class="actions" style="margin-top:10px">
-      <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://www.acehardware.com/store-locator">Ace Hardware</a>
-      <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://www.rona.ca/en/store-locator">RONA</a>
-      <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://www.tractorsupply.com/tsc/store-locator">Tractor Supply</a>
-      <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://www.northerntool.com/store_locator">Northern Tool</a>
-      <a class="btn btn--primary" target="_blank" rel="noopener" href="https://forms.gle/WNYyVcStumA9eDiE7">Open request form</a>
-    </div>
+  <!-- Local help (non-affiliate) -->
+  <section class="container section lead">
+    <h2 class="section-title">Find local rental or repair</h2>
+    <p><a class="btn btn--ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" target="_blank" rel="noopener">Open request form</a></p>
+    <ul class="links">
+      <li><a href="https://www.acehardware.com/store-locator" rel="noopener">Ace Hardware store locator</a></li>
+      <li><a href="https://www.rona.ca/en/store-locator" rel="noopener">RONA store locator</a></li>
+      <li><a href="https://www.tractorsupply.com/tsc/store-locator" rel="noopener">Tractor Supply store locator</a></li>
+      <li><a href="https://www.northerntool.com/store_locator" rel="noopener">Northern Tool store locator</a></li>
+    </ul>
   </section>
-</main>
 
-<footer class="site">
-  <div class="container small">
-    <p>As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.</p>
-    <nav class="links">
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/sitemap.xml">Sitemap</a>
-    </nav>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="disclosure">
+        As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.
+      </p>
+      <nav class="footer-nav">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Sticky CTA (mobile) -->
+  <div class="sticky-cta" id="sticky" hidden>
+    <a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">
+      Check price on Amazon →
+    </a>
   </div>
-</footer>
 
-<!-- ====== Minimal JS: city label / storm ribbon / Amazon tagger / sticky CTA ====== -->
-<script>
-  // 1) City label (uses any previously cached value you set; safe fallback)
-  (function(){
+  <!-- Minimal JS: city label, Amazon routing, sticky bar, storm toggle -->
+  <script>
+  // 1) City label (best-effort, privacy-light)
+  (async function cityLabel(){
+    const el = document.querySelector('[data-city]');
+    if (!el) return;
     try {
       const cached = localStorage.getItem('sbnm_city_v1');
-      const city = cached ? JSON.parse(cached).display : null;
-      const el = document.querySelector('[data-city]');
-      if (el && city) el.textContent = city;
-    } catch(_) {}
+      if (cached) { el.textContent = JSON.parse(cached).display || 'your area'; return; }
+      if (!navigator.geolocation) return;
+      const pos = await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{maximumAge:6e5,timeout:4e3}));
+      const {latitude, longitude} = pos.coords;
+      const r = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}&localityLanguage=en`);
+      const data = r.ok ? await r.json() : {};
+      const city = data.city || data.locality || data.principalSubdivision || 'your area';
+      el.textContent = city;
+      localStorage.setItem('sbnm_city_v1', JSON.stringify({display: city}));
+    } catch(_) { /* fail silently */ }
   })();
 
-  // 2) Storm ribbon toggle
-  if (location.search.includes('storm=1')) {
-    const s = document.getElementById('storm-ribbon');
-    if (s) s.style.display = 'block';
-  }
-
-  // 3) Amazon CTA auto-tagging (US/CA)
-  (function(){
-    function isCA(){
+  // 2) Route all .cta → Amazon search w/ correct tag (US vs CA)
+  (function routeCTAs(){
+    const isCA = (() => {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       const lang = (navigator.language||'').toLowerCase();
       return tz.includes('Toronto') || tz.includes('Vancouver') || lang.endsWith('-ca');
-    }
-    const host = isCA() ? 'https://www.amazon.ca' : 'https://www.amazon.com';
-    const tag  = isCA() ? 'cansnowme-20' : 'snowme-20';
+    })();
+    const host = isCA ? 'https://www.amazon.ca' : 'https://www.amazon.com';
+    const tag  = isCA ? 'cansnowme-20'        : 'snowme-20';
     document.querySelectorAll('.cta[data-amz-q]').forEach(a=>{
-      const q = encodeURIComponent(a.getAttribute('data-amz-q'));
+      const q = encodeURIComponent(a.getAttribute('data-amz-q') || 'snow blower');
       a.href = `${host}/s?k=${q}&tag=${tag}`;
-      a.target = '_blank'; a.rel = 'sponsored nofollow noopener';
+      a.target = '_blank';
+      a.rel = 'sponsored nofollow noopener';
     });
+    // Sticky CTA default link
+    const sticky = document.getElementById('cta-amz');
+    if (sticky) sticky.href = `${host}/s?k=${encodeURIComponent('snow blower')}&tag=${tag}`;
   })();
 
-  // 4) Sticky mobile CTA at ~60% scroll
-  (function(){
-    const bar = document.createElement('div');
-    bar.className = 'sticky-cta is-hidden';
-    bar.innerHTML = `<a id="cta-amz" class="btn btn--primary">See today’s price on Amazon →</a>`;
-    document.body.appendChild(bar);
-
-    function isCA(){
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      const lang = (navigator.language||'').toLowerCase();
-      return tz.includes('Toronto') || tz.includes('Vancouver') || lang.endsWith('-ca');
-    }
-    const host = isCA() ? 'https://www.amazon.ca' : 'https://www.amazon.com';
-    const tag  = isCA() ? 'cansnowme-20' : 'snowme-20';
-    document.getElementById('cta-amz').href = `${host}/s?k=snow+blower&tag=${tag}`;
-
-    let shown=false;
-    window.addEventListener('scroll',()=>{
-      const p = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-      if (!shown && p > 0.6) { bar.classList.remove('is-hidden'); shown=true; }
+  // 3) Sticky CTA shows at 60% scroll (once per session)
+  (function stickyCTA(){
+    if (sessionStorage.getItem('sticky_seen')) return;
+    const el = document.getElementById('sticky'); if (!el) return;
+    let shown = false;
+    window.addEventListener('scroll', ()=>{
+      const p = (scrollY + innerHeight) / document.documentElement.scrollHeight;
+      if (!shown && p >= 0.6) { shown = true; el.hidden = false; sessionStorage.setItem('sticky_seen','1'); }
     }, {passive:true});
   })();
-</script>
 
+  // 4) Storm ribbon toggle via ?storm=1
+  (function stormToggle(){
+    if (location.search.includes('storm=1')) {
+      const s = document.getElementById('storm'); if (s) s.hidden = false;
+    }
+  })();
+  </script>
 </body>
 </html>
