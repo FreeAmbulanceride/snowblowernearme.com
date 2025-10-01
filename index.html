@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Snow blowers near <span data-city>your area</span> — in stock & ready</title>
+  <title>Snow blowers near your area — in stock & ready</title>
   <meta name="description" content="Quick compare of the best single- and two-stage snow blowers, plus fast rental/repair. Neutral visuals, no scraped prices—click to check live availability.">
 
   <!-- Canonical + discoverability -->
@@ -17,7 +17,7 @@
   <!-- Perf + CSS -->
   <link rel="preconnect" href="https://www.amazon.com">
   <link rel="preconnect" href="https://www.amazon.ca">
-  <link rel="stylesheet" href="/assets/styles.css?v=20251001a">
+  <link rel="stylesheet" href="/assets/styles.css?v=20251001b">
 </head>
 
 
@@ -36,18 +36,14 @@
       <span>snowblowernearme.com</span>
     </a>
 
-    <!-- Mobile toggle (hidden on desktop) -->
-    <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false">
-      <span class="sr-only">Open menu</span>
-      <!-- simple icon -->
-      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round"/>
+    <!-- Mobile toggle (hidden ≥ 768px) -->
+    <button class="nav-toggle" aria-label="Menu" aria-controls="site-nav" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
-      <span class="nav-toggle__label">Menu</span>
     </button>
 
-    <!-- Desktop nav -->
+    <!-- One nav, two layouts (CSS controls behavior by breakpoint) -->
     <nav id="site-nav" class="nav">
       <a href="/gravel/">Gravel</a>
       <a href="/quiet-battery/">Quiet/Battery</a>
@@ -57,6 +53,7 @@
     </nav>
   </div>
 </header>
+
 
 
 
@@ -265,55 +262,24 @@
 </script>
 
 <script>
-  (function(){
-    const btn = document.querySelector('.nav-toggle');
-    const nav = document.getElementById('site-nav');
-    if(!btn || !nav) return;
-
-    function closeNav(){ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
-    function openNav(){ nav.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); }
-
-    btn.addEventListener('click', ()=> nav.classList.contains('is-open') ? closeNav() : openNav());
-    nav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
-    document.addEventListener('click', e=>{ if(!nav.contains(e.target) && !btn.contains(e.target)) closeNav(); });
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
-  })();
-</script>
-
-<script>
-(function mobileNav(){
-  const toggle = document.querySelector('.nav-toggle');
+(function cleanMobileNav(){
+  const btn = document.querySelector('.nav-toggle');
   const nav = document.getElementById('site-nav');
-  if(!toggle || !nav) return;
+  if(!btn || !nav) return;
 
-  // open/close
-  function setOpen(open){
-    nav.classList.toggle('is-open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    document.body.classList.toggle('nav-open', open);
-    if(open){
-      // focus first link
-      const first = nav.querySelector('a');
-      first && first.focus({preventScroll:true});
-    }
-  }
+  const open = () => { nav.classList.add('is-open');  btn.setAttribute('aria-expanded','true');  document.body.style.overflow='hidden'; };
+  const close= () => { nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
 
-  toggle.addEventListener('click', ()=>{
-    const open = toggle.getAttribute('aria-expanded') !== 'true';
-    setOpen(open);
-  });
-
-  // close on ESC or outside click
-  document.addEventListener('keydown', e=>{
-    if(e.key === 'Escape') setOpen(false);
-  });
-  document.addEventListener('click', e=>{
+  btn.addEventListener('click', () => nav.classList.contains('is-open') ? close() : open());
+  nav.addEventListener('click', e => { if(e.target.tagName === 'A') close(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+  document.addEventListener('click', e => {
     if(!nav.classList.contains('is-open')) return;
-    const inside = e.target.closest('#site-nav,.nav-toggle');
-    if(!inside) setOpen(false);
-  });
+    if(!e.target.closest('#site-nav, .nav-toggle')) close();
+  }, {capture:true});
 })();
 </script>
+
 
 
 </body>
