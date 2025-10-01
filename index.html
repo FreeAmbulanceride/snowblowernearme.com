@@ -29,19 +29,26 @@
 <!-- Storm banner (shown via JS when 8cm snow is forecast) -->
 <div id="storm" class="storm">⚠️ 8cm+ snow forecast in your area — order early to avoid stockouts.</div>
 
-<header class="header" role="banner">
+<header class="header">
   <div class="container bar">
-    <a class="brand" href="/"><img src="/assets/logo.svg" alt="" /><span>snowblowernearme.com</span></a>
+    <a class="brand" href="/">
+      <img src="/assets/logo.svg" alt="" />
+      <span>snowblowernearme.com</span>
+    </a>
 
-    <!-- New mobile button -->
-    <button class="nav-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+    <!-- Mobile toggle (hidden on desktop) -->
+    <button class="nav-toggle" aria-controls="site-nav" aria-expanded="false">
+      <span class="sr-only">Open menu</span>
+      <!-- simple icon -->
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round"/>
       </svg>
+      <span class="nav-toggle__label">Menu</span>
     </button>
 
-    <!-- Give nav an id for the script -->
-    <nav id="site-nav" class="nav" role="navigation">
+    <!-- Desktop nav -->
+    <nav id="site-nav" class="nav">
       <a href="/gravel/">Gravel</a>
       <a href="/quiet-battery/">Quiet/Battery</a>
       <a href="/steep-driveways/">Steep/Long</a>
@@ -50,6 +57,7 @@
     </nav>
   </div>
 </header>
+
 
 
 
@@ -272,6 +280,40 @@
   })();
 </script>
 
+<script>
+(function mobileNav(){
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+  if(!toggle || !nav) return;
+
+  // open/close
+  function setOpen(open){
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('nav-open', open);
+    if(open){
+      // focus first link
+      const first = nav.querySelector('a');
+      first && first.focus({preventScroll:true});
+    }
+  }
+
+  toggle.addEventListener('click', ()=>{
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    setOpen(open);
+  });
+
+  // close on ESC or outside click
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape') setOpen(false);
+  });
+  document.addEventListener('click', e=>{
+    if(!nav.classList.contains('is-open')) return;
+    const inside = e.target.closest('#site-nav,.nav-toggle');
+    if(!inside) setOpen(false);
+  });
+})();
+</script>
 
 
 </body>
