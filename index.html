@@ -1,9 +1,123 @@
 </body>
+<script>
+// Simple A/B for CTA copy
+(function abCTA(){
+  const v = localStorage.getItem('cta_v') || (Math.random()>.5?'A':'B');
+  localStorage.setItem('cta_v', v);
+  document.querySelectorAll('.cta, #cta-amz').forEach(b=>{
+    b.textContent = v==='A' ? 'See today’s price on Amazon →' : 'Check price on Amazon →';
+  });
+  try{ gtag('event','exp_assign',{exp:'cta_copy',variant:v}); }catch(_){}
+})();
+</script>
+</body>
+<script>
+// Skimlinks/Sovrn health check (manual QA)
+(function skimHealth(){
+  const a = document.createElement('a'); a.href = 'https://www.rona.ca/';
+  a.addEventListener('click', ()=>{}); // noop
+  // Manual check: Click any RONA/Ace link → Network should show go.skimresources.com
+})();
+</script>
+</body>
+<script>
+// Storm ribbon toggle via ?storm=1
+if (location.search.includes('storm=1')) {
+  var storm = document.getElementById('storm');
+  if (storm) storm.hidden = false;
+}
+</script>
+  <div id="storm" hidden class="storm">Storm coming? Order now to avoid outages →</div>
+</body>
+<script>
+// GA4 event helper
+function ev(name, params){ try{ gtag('event', name, params||{});}catch(_){} }
+// Affiliate/merchant click events
+document.addEventListener('click', e=>{
+  const a = e.target.closest('a.cta'); if(!a) return;
+  const url = a.href||''; const isAmz = /amazon\./i.test(url);
+  ev('affiliate_click', {merchant: isAmz?'amazon':'other', url});
+  ev(`merchant_click_${isAmz?'amazon':'other'}`);
+});
+// Other key events
+window.addEventListener('compare_open', ()=>ev('compare_open'));
+window.addEventListener('filters_applied', e=>ev('filters_applied',e.detail));
+window.addEventListener('sticky_bar_show', ()=>ev('sticky_bar_show'));
+window.addEventListener('sticky_bar_click', ()=>ev('sticky_bar_click'));
+window.addEventListener('scroll_75', ()=>ev('scroll_75'));
+</script>
+</body>
+<script>
+// dev sanity check (leave in production – harmless)
+(function verifyTags(){
+  document.querySelectorAll('a[href*="amazon."]').forEach(a=>{
+    try{
+      const u = new URL(a.href, location.href);
+      if(!u.searchParams.get('tag')){
+        console.warn('Missing Amazon tag:', a.href);
+      }
+    }catch(_){}
+  });
+})();
+</script>
+  <div class="sticky-cta" id="sticky" hidden>
+    <a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">
+      See today’s price on Amazon →
+    <nav>
+      <a href="/">Home</a>
+      <a href="/gravel/">Gravel</a>
+      <a href="/quiet-battery/">Quiet/Battery</a>
+      <a href="/steep-driveways/">Steep/Long</a>
+      <a href="/locations/">Cities</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+  if (sessionStorage.getItem('sticky_seen')) return;
+  const el = document.getElementById('sticky'); if(!el) return;
+  const btn = document.getElementById('cta-amz');
+
+  // country-aware Amazon search with correct tag
+  function amzBase(){
+    const isCA = (Intl.DateTimeFormat().resolvedOptions().timeZone||'').includes('Toronto')
+              || navigator.language.toLowerCase().includes('-ca');
+    const host = isCA ? 'https://www.amazon.ca' : 'https://www.amazon.com';
+    const tag  = isCA ? 'cansnowme-20' : 'snowme-20';
+    return `${host}/s?k=snow+blower&tag=${tag}`;
+  }
+  btn.href = amzBase();
+
+  let fired=false;
+  window.addEventListener('scroll', () => {
+    const progress = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+    if (!fired && progress >= 0.6) {
+      el.hidden = false; fired = true; sessionStorage.setItem('sticky_seen','1');
+      try{ gtag?.('event','sticky_bar_show'); }catch(_){}
+    }
+  });
+  btn.addEventListener('click', ()=>{ try{ gtag?.('event','sticky_bar_click'); }catch(_){}})
+})();
+</script>
+  <div class="sticky-cta" id="sticky" hidden>
+    <a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">
+      See today’s price on Amazon →
+    </a>
+  </div>
+</body>
 <!-- Skimlinks: monetize non-Amazon retailers -->
 <script type="text/javascript" src="https://s.skimresources.com/js/292387X1779525.skimlinks.js"></script>
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://www.amazon.com">
+  <link rel="preconnect" href="https://www.amazon.ca">
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config','G-XXXXXXX',{'anonymize_ip':true});
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Snow blowers near you — in stock & ready</title>
@@ -47,7 +161,13 @@
   </div>
 </header>
 
+
 <main class="container">
+  <!-- Storm Ribbon (hidden by default, show via JS for major events) -->
+  <div id="storm-ribbon">
+    Major snow event: See updated picks and local stock below ↓
+  </div>
+
   <!-- HERO -->
   <section class="hero card">
     <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
@@ -58,19 +178,21 @@
     </div>
   </section>
 
-  <!-- Credibility -->
+  <!-- Prominent Updated Date -->
   <section id="why">
-    <p class="small">Updated <time datetime="2025-09-30">September 30, 2025</time> · Tested for heavy/wet snow & powder, paved vs gravel driveways, and cold starts. US/Canada routing sends you to retailers likely to have stock near you.</p>
+  <p class="small updated-date">Updated <time datetime="2025-09-30">September 30, 2025</time> · Tested for heavy/wet snow & powder, paved vs gravel driveways, and cold starts. US/Canada routing sends you to retailers likely to have stock near you.</p>
   </section>
 
-  <!-- PICKS -->
+  <!-- PICKS (reordered: deep/wet snow card first) -->
   <section id="top-picks">
   <h2 class="section-title">Today’s Top Picks</h2>
   <p class="section-kicker">Check out the best bang for your buck below.</p>
   <div class="grid">
-      <!-- Card 1 -->
+      <!-- Card 1: Deep/wet snow, gravel (moved to top) -->
       <article class="tile" data-driveway="gravel" data-depth="deep" data-noise="ok">
-        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
+        <div class="thumb" role="img" aria-label="Neutral snow blower illustration">
+          <img src="/assets/picks/ariens.png" alt="Ariens Classic 24" loading="lazy" width="320" height="180" />
+        </div>
         <h3>Ariens Classic 24" — two-stage workhorse</h3>
         <div class="meta">
           <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">steel auger</span><span class="tag">self-propelled</span>
@@ -82,9 +204,11 @@
         <a class="btn btn-primary cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
       </article>
 
-      <!-- Card 2 -->
+      <!-- Card 2: Quiet/battery -->
       <article class="tile" data-driveway="paved" data-depth="light" data-noise="low">
-        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
+        <div class="thumb" role="img" aria-label="Neutral snow blower illustration">
+          <img src="/assets/picks/ego.png" alt="EGO Power+ 21" loading="lazy" width="320" height="180" />
+        </div>
         <h3>EGO Power+ 21" — quiet single-stage electric</h3>
         <div class="meta">
           <span class="tag">21" width</span><span class="tag">single-stage</span><span class="tag">battery</span><span class="tag">paved driveways</span>
@@ -96,9 +220,11 @@
         <a class="btn btn-primary cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
       </article>
 
-      <!-- Card 3 -->
+      <!-- Card 3: Starter value -->
       <article class="tile" data-driveway="paved" data-depth="moderate" data-noise="ok">
-        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
+        <div class="thumb" role="img" aria-label="Neutral snow blower illustration">
+          <img src="/assets/picks/toro.png" alt="Budget 24 Two-Stage" loading="lazy" width="320" height="180" />
+        </div>
         <h3>Budget 24" Two-Stage — starter value</h3>
         <div class="meta">
           <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">starter</span>

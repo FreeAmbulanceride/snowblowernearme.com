@@ -59,6 +59,55 @@ function pickBest(destinations, country) {
   return list[0]?.url || null;
 }
 
+
+// --- Router Scoreboard Logging ---
+function logMerchantClick(merchant, country) {
+  try {
+    const key = `sbnm_scoreboard_v1`;
+    const raw = localStorage.getItem(key);
+    const data = raw ? JSON.parse(raw) : {};
+    const mkey = `${merchant}_${country}`;
+    data[mkey] = data[mkey] || { clicks: 0 };
+    data[mkey].clicks += 1;
+    localStorage.setItem(key, JSON.stringify(data));
+    // Also fire a custom event for analytics if needed
+    window.dispatchEvent(new CustomEvent('merchant_click', { detail: { merchant, country } }));
+  } catch(e){}
+}
+
+function getScoreboard(country) {
+  try {
+    const key = `sbnm_scoreboard_v1`;
+    const raw = localStorage.getItem(key);
+    const data = raw ? JSON.parse(raw) : {};
+    // Compute pseudo-EPC (clicks only, no revenue)
+    const out = {};
+    for (const k in data) {
+      if (k.endsWith(`_${country}`)) {
+        const merchant = k.replace(`_${country}`, '');
+        out[merchant] = data[k].clicks || 0;
+      }
+    }
+    return out;
+  } catch { return {}; }
+}
+
+// Adjust routing if a non-Amazon merchant outperforms Amazon for a route
+function pickBestWithScoreboard(destinations, country) {
+  const scoreboard = getScoreboard(country);
+  const byGeo = destinations.filter(d => !d.geo || d.geo.includes(country));
+  let list = (byGeo.length ? byGeo : destinations).slice()
+    .sort((a,b)=>(a.priority??99)-(b.priority??99));
+  // If a non-Amazon merchant has more clicks than Amazon, move it to the top
+  const amazon = list.find(d => d.merchant === 'amazon');
+  const topNonAmazon = list.find(d => d.merchant !== 'amazon');
+  if (amazon && topNonAmazon && scoreboard[topNonAmazon.merchant] > (scoreboard['amazon']||0)) {
+    // Move topNonAmazon to the front
+    list = [topNonAmazon, ...list.filter(d => d !== topNonAmazon)];
+  }
+  return list[0]?.url || null;
+}
+
 /** Public: hydrate all CTAs on the page */
 export async function wireCTAs() {
   const ctAs = Array.from(document.querySelectorAll('a.cta'));
@@ -75,11 +124,22 @@ export async function wireCTAs() {
     const model = a.dataset.model || null;
 
     const entry = (id && byId.get(id)) || (model && byModel.get(model));
-    let url = entry ? pickBest(entry.destinations || [], country) : null;
+    let url = entry ? pickBestWithScoreboard(entry.destinations || [], country) : null;
     if (!url) url = FALLBACK[country] || FALLBACK.US;
     a.href = ensureAmazonTag(url);
     a.setAttribute('rel','sponsored nofollow noopener');
     a.setAttribute('target','_blank');
+
+    // Merchant click logging
+    a.addEventListener('click', function(e) {
+      const dest = entry ? pickBestWithScoreboard(entry.destinations || [], country) : null;
+      let merchant = 'unknown';
+      if (dest) {
+        const found = (entry.destinations || []).find(d => d.url === dest);
+        if (found && found.merchant) merchant = found.merchant;
+      }
+      logMerchantClick(merchant, country);
+    });
   }
 }
 

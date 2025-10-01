@@ -27,6 +27,13 @@ export function initCity() {
 
   // paint whatever we have immediately
   paintCity(city);
+
+  // Fire compare_open event if compare table is visible
+  document.querySelectorAll('.compare table').forEach(tbl => {
+    tbl.addEventListener('mouseenter', () => {
+      window.dispatchEvent(new CustomEvent('compare_open'));
+    }, { once: true });
+  });
 }
 
 function paintCity(city) {
@@ -37,7 +44,11 @@ function paintCity(city) {
 export function initLocalHelp() {
   const btn = document.querySelector('[data-action="local-help"]');
   if (!btn) return;
-  btn.addEventListener('click', (e) => { e.preventDefault(); window.open(FORM_LINK, '_blank', 'noopener'); });
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(FORM_LINK, '_blank', 'noopener');
+    window.dispatchEvent(new CustomEvent('sticky_bar_click'));
+  });
 }
 
 /* ---------- Filters (chips → show/hide cards) ---------- */
@@ -53,6 +64,7 @@ export function initFilters() {
     ch.classList.add('is-active');
     state[ch.dataset.group] = ch.dataset.value;
     apply();
+    window.dispatchEvent(new CustomEvent('filters_applied', { detail: { ...state } }));
   }));
 
   function apply(){
@@ -67,4 +79,30 @@ export function initFilters() {
     });
   }
   apply();
+
+  // Instrument scroll_75 event
+  let fired = false;
+  window.addEventListener('scroll', () => {
+    if (fired) return;
+    const scrolled = window.scrollY + window.innerHeight;
+    if (scrolled / document.body.scrollHeight > 0.75) {
+      window.dispatchEvent(new CustomEvent('scroll_75'));
+      fired = true;
+    }
+  });
 }
+
+// Instrument affiliate_click, merchant_click_amazon, merchant_click_ace
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a.cta').forEach(a => {
+    a.addEventListener('click', e => {
+      window.dispatchEvent(new CustomEvent('affiliate_click'));
+      const id = a.dataset.id || '';
+      if (a.href.includes('amazon.')) {
+        window.dispatchEvent(new CustomEvent('merchant_click_amazon'));
+      } else if (a.href.includes('acehardware.com')) {
+        window.dispatchEvent(new CustomEvent('merchant_click_ace'));
+      }
+    });
+  });
+});
