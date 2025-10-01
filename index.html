@@ -115,14 +115,122 @@
 
 <!-- Storm logic: show banner if forecast >= 8cm (mock hook – call your weather check and toggle .show) -->
 <script>
-  // Replace this stub with your real weather signal
-  (function storm8cm(){
+/**
+ * Storm ribbon: show if forecast snowfall ≥ 8 cm in the next 48h.
+ * Uses Open-Meteo (no key, CORS-enabled). Caches results for 3 hours.
+ * Graceful fallbacks: cached city → geolocation (with permission) → bail.
+ */
+(function stormRibbon(){
+  const BANNER      = document.getElementById('storm');
+  const CACHE_KEY   = 'sbnm_storm_v1';
+  const CITY_KEY    = 'sbnm_city_v1'; // {display, lat, lon} (optional)
+  const THRESHOLD_CM= 8;              // show when >= 8 cm
+  const TTL_MS      = 3 * 60 * 60 * 1000; // 3 hours
+
+  if (!BANNER) return;
+
+  // 1) Try cached decision first
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
+    if (cached && Date.now() - cached.t < TTL_MS) {
+      if (cached.show) BANNER.classList.add('show');
+      return;
+    }
+  } catch(_) {}
+
+  // 2) Get a lat/lon
+  function round2(n){ return Math.round(n*100)/100; }
+  function fromCachedCity(){
+    try {
+      const cc = JSON.parse(localStorage.getItem(CITY_KEY)||'null');
+      if (cc && typeof cc.lat==='number' && typeof cc.lon==='number') {
+        return {lat:cc.lat, lon:cc.lon, label:cc.display||'your area'};
+      }
+    } catch(_) {}
+    return null;
+  }
+  function fromGeo(){
+    return new Promise((resolve,reject)=>{
+      if (!navigator.geolocation) return reject(new Error('no-geo'));
+      navigator.geolocation.getCurrentPosition(
+        p=>resolve({lat:round2(p.coords.latitude), lon:round2(p.coords.longitude)}),
+        reject,
+        {timeout:5000, maximumAge:600000}
+      );
+    });
+  }
+
+  (async function run(){
+    let loc = fromCachedCity();
+    if (!loc) {
+      try { loc = await fromGeo(); } catch(_) {}
+    }
+    if (!loc) {
+      // No location → cache a "no show" for TTL and exit
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), show:false})); }catch(_){}
+      return;
+    }
+
+    // 3) Query Open-Meteo for hourly snowfall (cm)
+    // Docs: https://api.open-meteo.com/v1/forecast
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(loc.lat)}&longitude=${encodeURIComponent(loc.lon)}&hourly=snowfall&forecast_days=2&timezone=auto`;
+    let show = false;
     try{
-      const shouldShow = sessionStorage.getItem('storm8') === '1';
-      if (shouldShow) document.getElementById('storm')?.classList.add('show');
-    }catch(_){}
+      const res = await fetch(url, {headers:{'Accept':'application/json'}});
+      if (res.ok) {
+        const data = await res.json();
+        const arr = (data && data.hourly && data.hourly.snowfall) || [];
+        // Sum next 48h snowfall
+        const total = arr.slice(0, 48).reduce((s,v)=>s + (Number(v)||0), 0);
+        show = total >= THRESHOLD_CM;
+      }
+    }catch(_){ /* network fail → don’t show */ }
+
+    // 4) Apply + cache
+    if (show) BANNER.classList.add('show');
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), show})); }catch(_){}
   })();
+})();
 </script>
+
+<script>
+/**
+ * Light city resolver (uses previously-saved city or geolocation label).
+ * Updates the H1 <span data-city> and the <title>.
+ */
+(function cityTitle(){
+  const CITY_KEY = 'sbnm_city_v1'; // expect {display, lat, lon}
+  const citySpan = document.querySelector('[data-city]');
+  const BASE_TITLE = 'Snow blowers near {CITY} — in stock & ready';
+
+  function setCityLabel(label){
+    if (label && citySpan) citySpan.textContent = label;
+    const t = BASE_TITLE.replace('{CITY}', label || 'your area');
+    document.title = t;
+  }
+
+  // 1) Cached
+  try{
+    const cached = JSON.parse(localStorage.getItem(CITY_KEY)||'null');
+    if (cached && cached.display) {
+      setCityLabel(cached.display);
+      return;
+    }
+  }catch(_){}
+
+  // 2) Geolocation best-effort label (approx; avoid reverse-geocode complexity here)
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      ()=> setCityLabel('your area'), // keep generic unless you have reverse-geocode
+      ()=> setCityLabel('your area'),
+      {timeout:4000, maximumAge:600000}
+    );
+  } else {
+    setCityLabel('your area');
+  }
+})();
+</script>
+
 
 </body>
 </html>

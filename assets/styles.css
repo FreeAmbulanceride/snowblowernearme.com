@@ -135,13 +135,14 @@ a:focus-visible, button:focus-visible{
 .footer nav{ display:flex; gap:12px; flex-wrap:wrap }
 
 /* ============== STORM BANNER ============== */
-.storm{
-  display:none;
-  position:sticky; top:0; z-index:50;
-  background:var(--accent); color:#0B1220; font-weight:800; text-align:center;
-  padding:.6rem 1rem; border-bottom:1px solid rgba(0,0,0,.25);
+/* In /assets/styles.css */
+.storm{display:none;background:#F59E0B;color:#0B1220;font-weight:800;text-align:center;padding:.6rem}
+.storm.show{display:block}
+@media (prefers-reduced-motion:no-preference){
+  .storm.show{animation:slideDown .25s ease-out}
+  @keyframes slideDown{from{transform:translateY(-6px);opacity:.6}to{transform:none;opacity:1}}
 }
-.storm.show{ display:block }
+
 
 /* ============== STICKY CTA (mobile) ============== */
 .sticky-cta{
