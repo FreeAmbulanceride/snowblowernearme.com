@@ -154,3 +154,38 @@ a:focus-visible, button:focus-visible{
 /* ============== UTIL ============== */
 .small{ font-size:.92rem; color:var(--muted) }
 .center{ text-align:center }
+
+/* ---- Mobile header/nav fix ---- */
+@media (max-width: 640px){
+  .header .bar{
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 0 6px;
+  }
+  .brand{ order: 0; margin-right: auto; }
+  .nav{
+    order: 1;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 2px;
+    margin: 0;
+    scrollbar-width: none;         /* Firefox */
+  }
+  .nav::-webkit-scrollbar{ display:none }  /* Safari/Chrome */
+
+  /* Make links into tappable “pills” */
+  .nav a{
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 10px;
+    background: #0E1A2B;
+    border: 1px solid rgba(147,197,253,.22);
+    border-radius: 999px;
+    color: #E2EEFF;
+  }
+}
+
