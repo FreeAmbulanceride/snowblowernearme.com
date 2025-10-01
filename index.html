@@ -1,36 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Snow blowers near <span data-city>your area</span> — in stock & ready</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snow blowers near your area — in stock & ready</title>
 
-  <!-- Preconnect for faster affiliate handoff -->
-  <link rel="preconnect" href="https://www.amazon.com" />
-  <link rel="preconnect" href="https://www.amazon.ca" />
+  <!-- Performance hints for Amazon -->
+  <link rel="preconnect" href="https://www.amazon.com">
+  <link rel="preconnect" href="https://www.amazon.ca">
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/assets/styles.css?v=20250930d" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20250930-clean">
 
-  <!-- GA4 -->
+  <!-- Meta preview -->
+  <meta property="og:url" content="https://snowblowernearme.com/">
+  <meta property="og:title" content="Snow blowers near your area — in stock & ready">
+  <meta property="og:image" content="https://snowblowernearme.com/assets/logo.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Optional GA4 (uncomment and set your ID)
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config','G-XXXXXXX', { anonymize_ip:true });
-  </script>
-
-  <!-- Skimlinks (monetize non-Amazon only) -->
-  <script src="https://s.skimresources.com/js/292387X1779525.skimlinks.js" async></script>
-
-  <!-- Simple critical safety net (kept tiny) -->
-  <style>
-    :root{--bg:#0B1220;--text:#F8FAFC;--primary:#F59E0B;--primaryText:#0B1220;--maxw:1040px}
-    html,body{margin:0;padding:0}
-    body{background:var(--bg);color:var(--text);font:16px/1.55 system-ui,Segoe UI,Roboto,Inter,Arial}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 16px}
-  </style>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+  gtag('js',new Date()); gtag('config','G-XXXXXXX',{anonymize_ip:true});</script>
+  -->
 </head>
 <body>
 
@@ -38,71 +30,77 @@
   <div class="container header-inner">
     <div class="brand">
       <span class="dot" aria-hidden="true"></span>
-      <span class="name">snowblowernearme.com</span>
+      <a class="name" href="/">snowblowernearme.com</a>
     </div>
-    <p class="disclosure">As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.</p>
-    <nav class="site-nav">
-      <a href="/">Home</a>
+    <nav class="nav">
       <a href="/gravel/">Gravel</a>
       <a href="/quiet-battery/">Quiet/Battery</a>
       <a href="/steep-driveways/">Steep/Long</a>
-      <a href="/locations/">Cities</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
     </nav>
+    <p class="disclosure">
+      As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.
+    </p>
   </div>
 </header>
 
 <main class="container">
-  <!-- Storm ribbon (toggled by JS or ?storm=1) -->
-  <div id="storm" hidden class="storm">Storm coming? Order now to avoid outages →</div>
-
   <!-- HERO -->
   <section class="hero card">
     <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
     <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for availability.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#top-picks">See Top Picks</a>
-      <a class="btn btn-ghost" href="#" data-action="local-help" target="_blank" rel="noopener">Find Local Help</a>
+      <a class="btn btn-ghost" href="#local-help">Find Local Help</a>
     </div>
   </section>
 
-  <!-- Updated date / trust cues -->
-  <section id="why">
-    <p class="small updated-date">
-      Updated <time id="updated" datetime=""></time> · Tested for heavy/wet snow &amp; powder, paved vs gravel driveways, and cold starts. US/Canada routing sends you to retailers likely to have stock near you.
-    </p>
+  <p class="small updated-date">
+    Updated <time datetime="2025-09-30">September 30, 2025</time> · Tested for heavy/wet snow &amp; powder, paved vs gravel driveways, and cold starts.
+  </p>
+
+  <!-- FILTERS -->
+  <section aria-label="Filters" class="filters">
+    <p class="section-kicker">Choose by driveway type, snow depth, and noise tolerance.</p>
+    <div class="chip-row" role="group" aria-label="Driveway">
+      <button class="chip" data-group="driveway" data-value="paved">Paved</button>
+      <button class="chip" data-group="driveway" data-value="gravel">Gravel</button>
+      <button class="chip" data-group="driveway" data-value="mixed">Mixed</button>
+    </div>
+    <div class="chip-row" role="group" aria-label="Depth">
+      <button class="chip" data-group="depth" data-value="light">Light</button>
+      <button class="chip" data-group="depth" data-value="moderate">Moderate</button>
+      <button class="chip" data-group="depth" data-value="deep">Deep</button>
+    </div>
+    <div class="chip-row" role="group" aria-label="Noise">
+      <button class="chip" data-group="noise" data-value="low">Low</button>
+      <button class="chip" data-group="noise" data-value="ok">OK with noise</button>
+    </div>
   </section>
 
   <!-- PICKS -->
   <section id="top-picks">
     <h2 class="section-title">Today’s Top Picks</h2>
-    <p class="section-kicker">Choose by driveway type, snow depth, and noise tolerance.</p>
-
-    <!-- (Optional) filters UI goes here -->
 
     <div class="grid">
       <!-- Card 1 -->
       <article class="tile" data-driveway="gravel" data-depth="deep" data-noise="ok">
-        <div class="thumb" role="img" aria-label="Neutral snow blower">
-          <img src="/assets/picks/ariens.png" alt="Ariens Classic 24" loading="lazy" width="320" height="180" />
-        </div>
+        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
         <h3>Ariens Classic 24" — two-stage workhorse</h3>
         <div class="meta">
           <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">steel auger</span><span class="tag">self-propelled</span>
         </div>
         <ul class="pros">
-          <li>Chews through deep, wet snow; safe on gravel.</li>
+          <li>Chews through deep, wet snow; safer on gravel.</li>
           <li>Easy parts availability in US.</li>
         </ul>
-        <a class="btn btn-primary cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+        <a class="btn btn-primary cta" data-id="ariens-classic-24" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon →</a>
       </article>
 
       <!-- Card 2 -->
       <article class="tile" data-driveway="paved" data-depth="light" data-noise="low">
-        <div class="thumb" role="img" aria-label="Neutral snow blower">
-          <img src="/assets/picks/ego.png" alt="EGO Power+ 21" loading="lazy" width="320" height="180" />
-        </div>
+        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
         <h3>EGO Power+ 21" — quiet single-stage electric</h3>
         <div class="meta">
           <span class="tag">21" width</span><span class="tag">single-stage</span><span class="tag">battery</span>
@@ -111,14 +109,12 @@
           <li>Low noise and low maintenance.</li>
           <li>Instant starts in cold.</li>
         </ul>
-        <a class="btn btn-primary cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+        <a class="btn btn-primary cta" data-id="ego-powerplus-21" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon →</a>
       </article>
 
       <!-- Card 3 -->
       <article class="tile" data-driveway="paved" data-depth="moderate" data-noise="ok">
-        <div class="thumb" role="img" aria-label="Neutral snow blower">
-          <img src="/assets/picks/toro.png" alt="Budget 24 Two-Stage" loading="lazy" width="320" height="180" />
-        </div>
+        <div class="thumb" role="img" aria-label="Neutral snow blower illustration"></div>
         <h3>Budget 24" Two-Stage — starter value</h3>
         <div class="meta">
           <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">starter</span>
@@ -127,28 +123,30 @@
           <li>Affordable step into two-stage power.</li>
           <li>Good for moderate snowfall.</li>
         </ul>
-        <a class="btn btn-primary cta" data-id="budget-24-two-stage" rel="sponsored nofollow noopener" target="_blank">Check price →</a>
+        <a class="btn btn-primary cta" data-id="budget-24-two-stage" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon →</a>
       </article>
     </div>
 
     <!-- Compare table -->
-    <div class="compare">
+    <div class="compare" role="region" aria-label="Compare picks">
       <table>
         <thead>
-          <tr><th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th>Link</th></tr>
+          <tr>
+            <th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th>Link</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
             <td>Ariens Classic 24"</td><td>Two-stage</td><td>24"</td><td>Deep/wet snow, gravel</td>
-            <td><a class="cta" data-id="ariens-classic-24" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td>
+            <td><a class="cta" data-id="ariens-classic-24" target="_blank" rel="sponsored nofollow noopener">Check availability</a></td>
           </tr>
           <tr>
             <td>EGO Power+ 21"</td><td>Single-stage (battery)</td><td>21"</td><td>Paved, low noise</td>
-            <td><a class="cta" data-id="ego-powerplus-21" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td>
+            <td><a class="cta" data-id="ego-powerplus-21" target="_blank" rel="sponsored nofollow noopener">Check availability</a></td>
           </tr>
           <tr>
             <td>Budget 24" Two-Stage</td><td>Two-stage</td><td>24"</td><td>Starter value</td>
-            <td><a class="cta" data-id="budget-24-two-stage" rel="sponsored nofollow noopener" target="_blank">Check availability</a></td>
+            <td><a class="cta" data-id="budget-24-two-stage" target="_blank" rel="sponsored nofollow noopener">Check availability</a></td>
           </tr>
         </tbody>
       </table>
@@ -158,7 +156,8 @@
   <!-- Local help -->
   <section id="local-help" class="lead">
     <h2 class="section-title">Find local rental or repair</h2>
-    <p><a class="btn btn-ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" rel="noopener" target="_blank">Open request form</a></p>
+    <p>Need a rental today or fast repair? Use the quick request form and we’ll send nearby options.</p>
+    <p><a class="btn btn-ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" target="_blank" rel="noopener">Open request form</a></p>
     <ul>
       <li><a href="https://www.acehardware.com/store-locator" rel="noopener">Ace Hardware store locator</a></li>
       <li><a href="https://www.rona.ca/en/store-locator" rel="noopener">RONA store locator</a></li>
@@ -170,7 +169,9 @@
 
 <footer class="site">
   <div class="container">
-    <p class="disclosure">As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.</p>
+    <p class="disclosure">
+      As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.
+    </p>
     <nav class="links">
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
@@ -179,91 +180,85 @@
   </div>
 </footer>
 
-<!-- Schema (non-price) -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ItemList","itemListElement":[
- {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Ariens Classic 24\" Two-Stage","brand":"Ariens","category":"Snow Blower"}},
- {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"EGO Power+ 21\" Single-Stage","brand":"EGO","category":"Snow Blower"}},
- {"@type":"ListItem","position":3,"item":{"@type":"Product","name":"Budget 24\" Two-Stage","brand":"Generic","category":"Snow Blower"}}
-]}
-</script>
-
-<!-- Money + UX scripts (order matters) -->
-<script type="module">
-  import { wireCTAs } from '/js/link-resolver.js?v=3';
-  import { initCity, initFilters, initLocalHelp } from '/js/ui.js?v=3';
-  wireCTAs();            // routes + Amazon tags
-  initCity();            // set <span data-city>
-  initFilters();         // (if you’re using chips)
-  initLocalHelp();       // opens Google Form
-</script>
-
-<script>
-  // Updated date autopilot
-  (function(){const t=document.getElementById('updated'); if(t&&!t.textContent){
-    const d=new Date(); t.dateTime=d.toISOString().slice(0,10);
-    t.textContent=d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
-  }})();
-
-  // Sticky mobile CTA (60% scroll, once per session)
-  (function stickyBar(){
-    if (sessionStorage.getItem('sticky_seen')) return;
-    const el = document.getElementById('sticky'); if(!el) return;
-    const btn = document.getElementById('cta-amz');
-    const isCA = navigator.language.toLowerCase().includes('-ca');
-    btn.href = (isCA? 'https://www.amazon.ca' : 'https://www.amazon.com')
-               + '/s?k=snow+blower&tag=' + (isCA? 'cansnowme-20' : 'snowme-20');
-    let fired=false;
-    window.addEventListener('scroll', () => {
-      const p = (scrollY + innerHeight) / document.documentElement.scrollHeight;
-      if (!fired && p >= 0.6 && document.activeElement?.tagName !== 'INPUT') {
-        el.hidden = false; fired = true; sessionStorage.setItem('sticky_seen','1');
-        try{ gtag('event','sticky_bar_show'); }catch(_){}
-      }
-      if (p >= 0.75) { try{ gtag('event','scroll_75'); }catch(_){} }
-    });
-    btn.addEventListener('click', ()=>{ try{ gtag('event','sticky_bar_click'); }catch(_){}})
-  })();
-
-  // A/B CTA copy
-  (function abCTA(){
-    const v = localStorage.getItem('cta_v') || (Math.random()>.5?'A':'B');
-    localStorage.setItem('cta_v', v);
-    document.querySelectorAll('.cta, #cta-amz').forEach(b=>{
-      b.textContent = v==='A' ? 'See today’s price on Amazon →' : 'Check price on Amazon →';
-    });
-    try{ gtag('event','exp_assign',{exp:'cta_copy',variant:v}); }catch(_){}
-  })();
-
-  // Amazon tag audit (dev safety)
-  (function verifyTags(){
-    document.querySelectorAll('a[href*="amazon."]').forEach(a=>{
-      try{
-        const u = new URL(a.href, location.href);
-        if(!u.searchParams.get('tag')) console.warn('Missing Amazon tag:', a.href);
-      }catch(_){}
-    });
-  })();
-
-  // Storm toggle via ?storm=1
-  if (location.search.includes('storm=1')) { const s=document.getElementById('storm'); if(s) s.hidden=false; }
-
-  // GA4 affiliate events
-  function ev(n,p){ try{ gtag('event', n, p||{});}catch(_){ } }
-  document.addEventListener('click', e=>{
-    const a = e.target.closest('a.cta'); if(!a) return;
-    const isAmz = /amazon\./i.test(a.href||'');
-    ev('affiliate_click', {merchant: isAmz?'amazon':'other', url: a.href});
-    ev(`merchant_click_${isAmz?'amazon':'other'}`);
-  });
-</script>
-
-<!-- Sticky CTA bar (one instance only) -->
+<!-- Sticky CTA (mobile) -->
 <div class="sticky-cta" id="sticky" hidden>
-  <a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">
-    See today’s price on Amazon →
-  </a>
+  <a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">See today’s price on Amazon →</a>
 </div>
 
+<!-- ========== Behavior: City in H1/Title, Filters, CTAs, Sticky ========== -->
+<script>
+/* City label + <title> */
+(function () {
+  const el = document.querySelector('[data-city]');
+  let city = null;
+  try { city = JSON.parse(localStorage.getItem('sbnm_city_v1')||'{}').display || null; } catch(_) {}
+  if (!city) { const p=new URLSearchParams(location.search); city=(p.get('city')||'').trim(); }
+  city = city || 'your area';
+  if (el) el.textContent = city;
+  const t = document.querySelector('title'); if (t) t.textContent = `Snow blowers near ${city} — in stock & ready`;
+})();
+
+/* Filters */
+(function () {
+  const state = { driveway:null, depth:null, noise:null };
+  function apply() {
+    document.querySelectorAll('.grid .tile').forEach(tile=>{
+      const ok = (!state.driveway || tile.dataset.driveway===state.driveway) &&
+                 (!state.depth    || tile.dataset.depth===state.depth) &&
+                 (!state.noise    || tile.dataset.noise===state.noise);
+      tile.hidden = !ok;
+    });
+  }
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      const g=chip.getAttribute('data-group'), v=chip.getAttribute('data-value');
+      const active = chip.classList.toggle('is-active');
+      document.querySelectorAll(`.chip[data-group="${g}"]`).forEach(c=>{ if(c!==chip) c.classList.remove('is-active'); });
+      state[g] = active ? v : null; apply();
+    });
+  });
+})();
+
+/* Amazon-first link resolver (no external module) */
+(function () {
+  const isCA = (navigator.language||'').toLowerCase().includes('-ca') ||
+               (Intl.DateTimeFormat().resolvedOptions().timeZone||'').toLowerCase().includes('toronto');
+  const host = isCA ? 'https://www.amazon.ca' : 'https://www.amazon.com';
+  const tag  = isCA ? 'cansnowme-20' : 'snowme-20';
+
+  const LINKS = {
+    'ariens-classic-24':   `${host}/s?k=Ariens+Classic+24+snow+blower&tag=${tag}`,
+    'ego-powerplus-21':    `${host}/s?k=EGO+Power%2B+21+snow+blower&tag=${tag}`,
+    'budget-24-two-stage': `${host}/s?k=24%22+two-stage+snow+blower&tag=${tag}`
+  };
+
+  document.querySelectorAll('a.cta[data-id]').forEach(a=>{
+    const id=a.getAttribute('data-id'); if(LINKS[id]) a.href=LINKS[id];
+    a.setAttribute('rel','sponsored nofollow noopener'); a.setAttribute('target','_blank');
+  });
+
+  const sticky=document.getElementById('cta-amz');
+  if(sticky) sticky.href = `${host}/s?k=snow+blower&tag=${tag}`;
+
+  // Safety: add tag if any amazon link forgot it
+  document.querySelectorAll('a[href*="amazon."]').forEach(a=>{
+    try{const u=new URL(a.href,location.href); if(!u.searchParams.get('tag')){u.searchParams.set('tag',tag); a.href=u.toString();}}catch(_){}
+  });
+})();
+
+/* Sticky bar show at 60% scroll (once per session) */
+(function () {
+  if (sessionStorage.getItem('sticky_seen')) return;
+  const el=document.getElementById('sticky'); if(!el) return;
+  let shown=false;
+  window.addEventListener('scroll', ()=>{
+    const p=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight;
+    if(!shown && p>=0.6){ el.hidden=false; shown=true; sessionStorage.setItem('sticky_seen','1'); }
+  }, {passive:true});
+})();
+</script>
+
+<!-- Skimlinks: monetize non-Amazon retailers automatically -->
+<script src="https://s.skimresources.com/js/292387X1779525.skimlinks.js" defer></script>
 </body>
 </html>
