@@ -20,16 +20,28 @@
   <link rel="stylesheet" href="/assets/styles.css?v=20251001a">
 </head>
 
+
+
+
 <body>
 
   
 <!-- Storm banner (shown via JS when 8cm snow is forecast) -->
 <div id="storm" class="storm">⚠️ 8cm+ snow forecast in your area — order early to avoid stockouts.</div>
 
-<header class="header">
+<header class="header" role="banner">
   <div class="container bar">
     <a class="brand" href="/"><img src="/assets/logo.svg" alt="" /><span>snowblowernearme.com</span></a>
-    <nav class="nav">
+
+    <!-- New mobile button -->
+    <button class="nav-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Give nav an id for the script -->
+    <nav id="site-nav" class="nav" role="navigation">
       <a href="/gravel/">Gravel</a>
       <a href="/quiet-battery/">Quiet/Battery</a>
       <a href="/steep-driveways/">Steep/Long</a>
@@ -37,8 +49,9 @@
       <a href="/terms.html">Terms</a>
     </nav>
   </div>
-  
 </header>
+
+
 
 <main class="container section" id="main">
   <section class="hero">
@@ -242,6 +255,23 @@
   }
 })();
 </script>
+
+<script>
+  (function(){
+    const btn = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('site-nav');
+    if(!btn || !nav) return;
+
+    function closeNav(){ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+    function openNav(){ nav.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); }
+
+    btn.addEventListener('click', ()=> nav.classList.contains('is-open') ? closeNav() : openNav());
+    nav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
+    document.addEventListener('click', e=>{ if(!nav.contains(e.target) && !btn.contains(e.target)) closeNav(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+  })();
+</script>
+
 
 
 </body>
