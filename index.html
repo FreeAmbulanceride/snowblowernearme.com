@@ -1,33 +1,46 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Snow blowers near your area — in stock & ready</title>
-  <meta name="description" content="Fast, clean picks for snow blowers that are usually in stock in the US & Canada. No scraped prices. Click through to check live availability." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snow blowers near you — in stock & ready</title>
 
-  <!-- Perf hints for Amazon handoff -->
-  <link rel="preconnect" href="https://www.amazon.com">
-  <link rel="preconnect" href="https://www.amazon.ca">
+  <!-- Preconnects for speed -->
+  <link rel="preconnect" href="https://www.amazon.com" crossorigin>
+  <link rel="preconnect" href="https://www.amazon.ca" crossorigin>
 
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/assets/styles.css?v=1" />
+  <!-- Main styles -->
+  <link rel="stylesheet" href="/assets/styles.css?v=1">
+
+  <!-- Safety patch (until you merge into styles.css) -->
+  <style>
+    /* Keep everything centered and prevent “far left” layout */
+    .container{max-width:1040px;margin:0 auto;padding:0 16px}
+    /* Hide any stray text inside thumbnails so they can’t explode */
+    .thumb > :not(img){display:none !important;}
+  </style>
+
+  <!-- Social previews -->
+  <meta property="og:title" content="Snow blowers near you — in stock & ready">
+  <meta property="og:url" content="https://snowblowernearme.com/">
+  <meta property="og:image" content="https://snowblowernearme.com/assets/logo.svg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
-  <!-- Site-wide disclosure (one time, above first CTA) -->
-  <p class="top-disclosure container">
+  <!-- Top disclosure -->
+  <div class="container" style="padding-top:10px;font-size:13px;color:#c9d3e3">
     As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.
-  </p>
+  </div>
 
-  <!-- Header / Nav -->
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/">
-        <img src="/assets/logo.svg" width="24" height="24" alt="" />
-        <span class="name">snowblowernearme<span class="dot">.</span>com</span>
-      </a>
-      <nav class="main-nav">
+      <div class="brand">
+        <img src="/assets/logo.svg" alt="" width="22" height="22" style="opacity:.9">
+        <span class="name">snowblowernearme.com</span>
+      </div>
+      <nav class="links" style="display:flex;gap:12px;flex-wrap:wrap;font-size:14px">
         <a href="/gravel/">Gravel</a>
         <a href="/quiet-battery/">Quiet/Battery</a>
         <a href="/steep-driveways/">Steep/Long</a>
@@ -37,210 +50,130 @@
     </div>
   </header>
 
-  <!-- Optional storm banner (off by default, enable via ?storm=1) -->
-  <div id="storm" hidden class="storm">Storm approaching? Order now to avoid stockouts and delivery delays →</div>
+  <!-- Storm ribbon (auto; hidden by default) -->
+  <div id="storm-ribbon" hidden
+       style="background:#F59E0B;color:#0B1220;font-weight:800;text-align:center;padding:.65rem 1rem;">
+    Winter alert for <span id="storm-city">your area</span>: 8 cm+ expected in the next 48 h — check stock now ↓
+  </div>
 
-<script>
-(async function stormAutoRibbon(){
-  const RIBBON_ID = 'storm';                 // <div id="storm" hidden>…</div>
-  const CACHE_KEY = 'storm_check_v1';
-  const CACHE_TTL_MS = 6 * 60 * 60 * 1000;   // 6 hours
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero card" style="margin-top:16px">
+      <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
+      <p class="sub">
+        Quick compare of the best single- and two-stage options, plus fast rental/repair.
+        Neutral visuals, no scraped prices—click through for live availability.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#top-picks">See top picks</a>
+        <a class="btn btn-ghost" href="#local-help">Request local rental/repair</a>
+      </div>
+    </section>
 
-  // 0) Skip if query param already forces it
-  if (location.search.includes('storm=1')) { 
-    const el = document.getElementById(RIBBON_ID); if (el) el.hidden = false; 
-    return;
-  }
+    <p class="small updated-date" style="margin:10px 0 18px;color:#c9d3e3">
+      Updated <time datetime="2025-09-30">September 30, 2025</time> ·
+      Tested for heavy/wet snow &amp; powder. Routing sends you to the right Amazon store with the correct tag.
+    </p>
 
-  // 1) Use cached decision to avoid extra calls
-  try {
-    const cached = JSON.parse(localStorage.getItem(CACHE_KEY)||'null');
-    if (cached && (Date.now() - cached.t) < CACHE_TTL_MS) {
-      if (cached.on) { const el = document.getElementById(RIBBON_ID); if (el) el.hidden = false; }
-      return;
-    }
-  } catch(_) {}
+    <!-- Picks -->
+    <section id="top-picks">
+      <h2 class="section-title">Today’s Top Picks</h2>
 
-  // 2) Get user location (coarse); fall back to “city” you already resolved
-  function getApprox() {
-    return new Promise((resolve) => {
-      if (!navigator.geolocation) return resolve(null);
-      navigator.geolocation.getCurrentPosition(
-        p => resolve({lat:p.coords.latitude, lon:p.coords.longitude}),
-        _ => resolve(null),
-        {maximumAge: 6e5, timeout: 4000}
-      );
-    });
-  }
-  let loc = await getApprox();
-  if (!loc) {
-    try {
-      const cachedCity = JSON.parse(localStorage.getItem('sbnm_city_v1')||'null');
-      // Optional: map a few popular cities to lat/lon as a tiny fallback table
-    } catch(_){}
-  }
-  if (!loc) return; // Give up quietly; site still works.
+      <div class="grid">
+        <!-- Card 1 -->
+        <article class="tile">
+          <div class="thumb">
+            <img src="/assets/picks/ariens.png" alt="Ariens Classic 24" loading="lazy" width="640" height="360">
+          </div>
+          <h3>Ariens Classic 24" — two-stage workhorse</h3>
+          <div class="meta">
+            <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">steel auger</span><span class="tag">self-propelled</span>
+          </div>
+          <ul class="pros">
+            <li>Chews through deep, wet snow; safer on gravel.</li>
+            <li>Good US/Canada parts availability.</li>
+          </ul>
+          <a class="btn btn-primary cta"
+             data-q="Ariens Classic 24 snow blower">Check price on Amazon →</a>
+        </article>
 
-  const {lat, lon} = loc;
+        <!-- Card 2 -->
+        <article class="tile">
+          <div class="thumb">
+            <img src="/assets/picks/ego.png" alt="EGO Power+ 21" loading="lazy" width="640" height="360">
+          </div>
+          <h3>EGO Power+ 21" — quiet single-stage electric</h3>
+          <div class="meta">
+            <span class="tag">21" width</span><span class="tag">single-stage</span><span class="tag">battery</span>
+          </div>
+          <ul class="pros">
+            <li>Low noise, low maintenance; instant starts in cold.</li>
+          </ul>
+          <a class="btn btn-primary cta"
+             data-q="EGO Power+ 21 snow blower">Check price on Amazon →</a>
+        </article>
 
-  // 3) Race 2 signal sources: alerts + forecast (lightweight, no keys)
-  function withTimeout(ms, p){ return Promise.race([p, new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms))]); }
+        <!-- Card 3 -->
+        <article class="tile">
+          <div class="thumb">
+            <img src="/assets/picks/toro.png" alt="Budget 24 Two-Stage" loading="lazy" width="640" height="360">
+          </div>
+          <h3>Budget 24" Two-Stage — starter value</h3>
+          <div class="meta">
+            <span class="tag">24" width</span><span class="tag">two-stage</span><span class="tag">starter</span>
+          </div>
+          <ul class="pros">
+            <li>Affordable step into two-stage power for moderate snowfall.</li>
+          </ul>
+          <a class="btn btn-primary cta"
+             data-q="24 inch two stage snow blower budget">Check price on Amazon →</a>
+        </article>
+      </div>
 
-  // 3a) Alerts
-  async function hasAlert() {
-    try {
-      // US: NWS has CORS and point-based alerts
-      if (navigator.language.toLowerCase().endsWith('-us') || (Intl.DateTimeFormat().resolvedOptions().timeZone||'').includes('America/')) {
-        const r = await withTimeout(5000, fetch(`https://api.weather.gov/alerts/active?point=${lat},${lon}`, {headers:{'Accept':'application/geo+json'}}));
-        if (!r.ok) return false;
-        const j = await r.json();
-        return (j.features && j.features.length > 0);
-      }
-      // Canada: Government CAP feed (national); simple heuristic via province feed fallback
-      const r = await withTimeout(6000, fetch('https://dd.weather.gc.ca/alerts/cap/Canada-cap-en.xml'));
-      if (!r.ok) return false;
-      const t = await r.text();
-      // crude match for “Warning” or “Snowfall”/“Winter Storm”
-      return /Warning|Snowfall|Winter Storm|Blizzard|Freezing Rain/i.test(t);
-    } catch(_){ return false; }
-  }
+      <!-- Simple compare -->
+      <div class="compare" style="margin-top:18px">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th>Link</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ariens Classic 24"</td><td>Two-stage</td><td>24"</td><td>Deep/wet snow, gravel</td>
+              <td><a class="cta" data-q="Ariens Classic 24 snow blower">Check availability</a></td>
+            </tr>
+            <tr>
+              <td>EGO Power+ 21"</td><td>Single-stage (battery)</td><td>21"</td><td>Paved, low noise</td>
+              <td><a class="cta" data-q="EGO Power+ 21 snow blower">Check availability</a></td>
+            </tr>
+            <tr>
+              <td>Budget 24" Two-Stage</td><td>Two-stage</td><td>24"</td><td>Starter value</td>
+              <td><a class="cta" data-q="24 inch two stage snow blower budget">Check availability</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  // 3b) Forecast spike (Open-Meteo; free, CORS)
-  async function hasSnowSpike() {
-    try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=snowfall,wind_speed_10m&forecast_days=3`;
-      const r = await withTimeout(5000, fetch(url));
-      if (!r.ok) return false;
-      const j = await r.json();
-      const snow = (j.hourly?.snowfall||[]).reduce((a,b)=>a+(+b||0),0); // cm over 72h
-      const windy = (j.hourly?.wind_speed_10m||[]).some(v => (+v||0) >= 40); // km/h
-      return (snow >= 10) || windy;
-    } catch(_){ return false; }
-  }
+    <!-- Local rental/repair -->
+    <section id="local-help" class="lead" style="margin-top:28px">
+      <h2 class="section-title">Find local rental or repair</h2>
+      <p>Need a rental today or fast repair? Use our form — we’ll route you to official store/service options in your area.</p>
+      <p><a class="btn btn-ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" target="_blank" rel="noopener">Open request form</a></p>
+      <ul>
+        <li><a href="https://www.acehardware.com/store-locator" rel="noopener">Ace Hardware store locator</a></li>
+        <li><a href="https://www.rona.ca/en/store-locator" rel="noopener">RONA store locator</a></li>
+        <li><a href="https://www.tractorsupply.com/tsc/store-locator" rel="noopener">Tractor Supply store locator</a></li>
+        <li><a href="https://www.northerntool.com/store_locator" rel="noopener">Northern Tool store locator</a></li>
+      </ul>
+    </section>
+  </main>
 
-  const [alertOn, spikeOn] = await Promise.all([hasAlert(), hasSnowSpike()]);
-  const shouldShow = !!(alertOn || spikeOn);
-
-  // 4) Persist decision & flip ribbon
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify({on:shouldShow, t:Date.now()})); } catch(_){}
-  if (shouldShow) {
-    const el = document.getElementById(RIBBON_ID);
-    if (el) el.hidden = false;
-  }
-})();
-</script>
-
-
-  <!-- HERO -->
-  <section class="hero container card">
-    <h1>Snow blowers near <span data-city>your area</span> — in stock &amp; ready</h1>
-    <p class="sub">Quick compare of the best single- and two-stage options, plus fast rental/repair. Neutral visuals, no scraped prices—click through for live availability.</p>
-    <div class="actions">
-      <a class="btn btn--primary" href="#top-picks">See top picks</a>
-      <a class="btn btn--ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" target="_blank" rel="noopener">Request local rental/repair</a>
-    </div>
-  </section>
-
-  <!-- Updated note -->
-  <section class="container small-note">
-    Updated <time datetime="2025-09-30">September 30, 2025</time> · Tested for heavy/wet snow &amp; powder, paved vs gravel driveways, and cold starts. US/Canada routing sends you to the right Amazon store with the correct tag.
-  </section>
-
-  <!-- PICKS -->
-  <section id="top-picks" class="container section">
-    <h2 class="section-title">Today’s Top Picks</h2>
-
-    <ul class="card-grid">
-      <!-- Card 1 -->
-      <li class="card">
-        <div class="thumb">
-          <img src="/assets/picks/ariens.png" width="640" height="360" alt="Ariens Classic 24 snow blower" loading="lazy" />
-        </div>
-        <h3>Ariens Classic 24&quot; — two-stage workhorse</h3>
-        <ul class="specs">
-          <li>24&quot; width</li><li>two-stage</li><li>steel auger</li><li>self-propelled</li>
-        </ul>
-        <ul class="pros">
-          <li>Chews through deep, wet snow; safer on gravel.</li>
-          <li>Parts availability in US/Canada is solid.</li>
-        </ul>
-        <a class="btn btn--primary cta" data-amz-q="Ariens Classic 24 snow blower">Check price on Amazon →</a>
-      </li>
-
-      <!-- Card 2 -->
-      <li class="card">
-        <div class="thumb">
-          <img src="/assets/picks/ego.png" width="640" height="360" alt="EGO Power+ 21 snow blower" loading="lazy" />
-        </div>
-        <h3>EGO Power+ 21&quot; — quiet single-stage electric</h3>
-        <ul class="specs">
-          <li>21&quot; width</li><li>single-stage</li><li>battery</li>
-        </ul>
-        <ul class="pros">
-          <li>Low noise, low upkeep; instant starts in cold.</li>
-        </ul>
-        <a class="btn btn--primary cta" data-amz-q="EGO Power+ 21 snow blower">Check price on Amazon →</a>
-      </li>
-
-      <!-- Card 3 -->
-      <li class="card">
-        <div class="thumb">
-          <img src="/assets/picks/toro.png" width="640" height="360" alt="Budget 24 two-stage snow blower" loading="lazy" />
-        </div>
-        <h3>Budget 24&quot; Two-Stage — starter value</h3>
-        <ul class="specs">
-          <li>24&quot; width</li><li>two-stage</li><li>starter</li>
-        </ul>
-        <ul class="pros">
-          <li>Affordable step into two-stage power for moderate snowfall.</li>
-        </ul>
-        <a class="btn btn--primary cta" data-amz-q="24 inch two stage snow blower">Check price on Amazon →</a>
-      </li>
-    </ul>
-
-    <!-- Compare table -->
-    <div class="compare">
-      <table>
-        <thead>
-          <tr><th>Model</th><th>Stage</th><th>Width</th><th>Best for</th><th class="ta-right">Link</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ariens Classic 24&quot;</td><td>Two-stage</td><td>24&quot;</td><td>Deep/wet snow, gravel</td>
-            <td class="ta-right"><a class="cta link" data-amz-q="Ariens Classic 24 snow blower">Check availability</a></td>
-          </tr>
-          <tr>
-            <td>EGO Power+ 21&quot;</td><td>Single-stage (battery)</td><td>21&quot;</td><td>Paved, low noise</td>
-            <td class="ta-right"><a class="cta link" data-amz-q="EGO Power+ 21 snow blower">Check availability</a></td>
-          </tr>
-          <tr>
-            <td>Budget 24&quot; Two-Stage</td><td>Two-stage</td><td>24&quot;</td><td>Starter value</td>
-            <td class="ta-right"><a class="cta link" data-amz-q="24 inch two stage snow blower">Check availability</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Local help (non-affiliate) -->
-  <section class="container section lead">
-    <h2 class="section-title">Find local rental or repair</h2>
-    <p><a class="btn btn--ghost" href="https://forms.gle/WNYyVcStumA9eDiE7" target="_blank" rel="noopener">Open request form</a></p>
-    <ul class="links">
-      <li><a href="https://www.acehardware.com/store-locator" rel="noopener">Ace Hardware store locator</a></li>
-      <li><a href="https://www.rona.ca/en/store-locator" rel="noopener">RONA store locator</a></li>
-      <li><a href="https://www.tractorsupply.com/tsc/store-locator" rel="noopener">Tractor Supply store locator</a></li>
-      <li><a href="https://www.northerntool.com/store_locator" rel="noopener">Northern Tool store locator</a></li>
-    </ul>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
+  <footer class="site">
+    <div class="container">
       <p class="disclosure">
         As an Amazon Associate, any qualifying earnings from this page go directly to supporting this website.
       </p>
-      <nav class="footer-nav">
+      <nav class="links" style="display:flex;gap:12px;flex-wrap:wrap">
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
         <a href="/sitemap.xml">Sitemap</a>
@@ -248,70 +181,106 @@
     </div>
   </footer>
 
-  <!-- Sticky CTA (mobile) -->
-  <div class="sticky-cta" id="sticky" hidden>
-    <a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">
-      Check price on Amazon →
-    </a>
-  </div>
-
-  <!-- Minimal JS: city label, Amazon routing, sticky bar, storm toggle -->
-  <script>
-  // 1) City label (best-effort, privacy-light)
-  (async function cityLabel(){
-    const el = document.querySelector('[data-city]');
-    if (!el) return;
-    try {
-      const cached = localStorage.getItem('sbnm_city_v1');
-      if (cached) { el.textContent = JSON.parse(cached).display || 'your area'; return; }
-      if (!navigator.geolocation) return;
-      const pos = await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{maximumAge:6e5,timeout:4e3}));
-      const {latitude, longitude} = pos.coords;
-      const r = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}&localityLanguage=en`);
-      const data = r.ok ? await r.json() : {};
-      const city = data.city || data.locality || data.principalSubdivision || 'your area';
-      el.textContent = city;
-      localStorage.setItem('sbnm_city_v1', JSON.stringify({display: city}));
-    } catch(_) { /* fail silently */ }
-  })();
-
-  // 2) Route all .cta → Amazon search w/ correct tag (US vs CA)
-  (function routeCTAs(){
-    const isCA = (() => {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      const lang = (navigator.language||'').toLowerCase();
-      return tz.includes('Toronto') || tz.includes('Vancouver') || lang.endsWith('-ca');
-    })();
-    const host = isCA ? 'https://www.amazon.ca' : 'https://www.amazon.com';
-    const tag  = isCA ? 'cansnowme-20'        : 'snowme-20';
-    document.querySelectorAll('.cta[data-amz-q]').forEach(a=>{
-      const q = encodeURIComponent(a.getAttribute('data-amz-q') || 'snow blower');
-      a.href = `${host}/s?k=${q}&tag=${tag}`;
-      a.target = '_blank';
-      a.rel = 'sponsored nofollow noopener';
-    });
-    // Sticky CTA default link
-    const sticky = document.getElementById('cta-amz');
-    if (sticky) sticky.href = `${host}/s?k=${encodeURIComponent('snow blower')}&tag=${tag}`;
-  })();
-
-  // 3) Sticky CTA shows at 60% scroll (once per session)
-  (function stickyCTA(){
-    if (sessionStorage.getItem('sticky_seen')) return;
-    const el = document.getElementById('sticky'); if (!el) return;
-    let shown = false;
-    window.addEventListener('scroll', ()=>{
-      const p = (scrollY + innerHeight) / document.documentElement.scrollHeight;
-      if (!shown && p >= 0.6) { shown = true; el.hidden = false; sessionStorage.setItem('sticky_seen','1'); }
-    }, {passive:true});
-  })();
-
-  // 4) Storm ribbon toggle via ?storm=1
-  (function stormToggle(){
-    if (location.search.includes('storm=1')) {
-      const s = document.getElementById('storm'); if (s) s.hidden = false;
-    }
-  })();
+  <!-- Schema (non-price) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Ariens Classic 24\" Two-Stage","brand":"Ariens","category":"Snow Blower"}},
+      {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"EGO Power+ 21\" Single-Stage","brand":"EGO","category":"Snow Blower"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"Product","name":"Budget 24\" Two-Stage","brand":"Generic","category":"Snow Blower"}}
+    ]
+  }
   </script>
+
+  <!-- Aff link wiring + storm ribbon -->
+  <script>
+    // Basic city hint (optional / no tracking)
+    (function cityFromLanguage(){
+      try{
+        const el = document.querySelector('[data-city]');
+        if(!el) return;
+        const cached = localStorage.getItem('sbnm_city_v1');
+        if (cached) { el.textContent = JSON.parse(cached).display || 'your area'; return; }
+        // fallback to browser language hint (very rough)
+        el.textContent = 'your area';
+      }catch(_){}
+    })();
+
+    // Build correct Amazon search URL with your tag
+    function amazonSearchUrl(query){
+      const lang = (navigator.language||'').toLowerCase();
+      const isCA = lang.includes('-ca') || lang.endsWith('ca');
+      const host = isCA ? 'https://www.amazon.ca' : 'https://www.amazon.com';
+      const tag  = isCA ? 'cansnowme-20' : 'snowme-20';
+      return host + '/s?k=' + encodeURIComponent(query) + '&tag=' + encodeURIComponent(tag);
+    }
+
+    // Wire all CTAs
+    (function wireCTAs(){
+      document.querySelectorAll('a.cta[data-q]').forEach(a=>{
+        a.href = amazonSearchUrl(a.dataset.q);
+        a.setAttribute('rel','sponsored nofollow noopener');
+        a.setAttribute('target','_blank');
+      });
+    })();
+
+    // Storm ribbon: show if next 48h snowfall >= 8 cm (Open-Meteo, no key)
+    (async function stormRibbon(){
+      const rib = document.getElementById('storm-ribbon');
+      const citySpan = document.getElementById('storm-city');
+      if (!rib) return;
+
+      function show(label){ if (label) citySpan.textContent = label; rib.hidden = false; }
+      if (!('geolocation' in navigator)) return;
+
+      try{
+        const pos = await new Promise((res,rej)=>{
+          navigator.geolocation.getCurrentPosition(res,rej,{timeout:5000,maximumAge:600000});
+        });
+        const lat = +pos.coords.latitude.toFixed(2);
+        const lon = +pos.coords.longitude.toFixed(2);
+
+        // Try to label city (best effort, non-blocking)
+        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage=en')
+          .then(r=>r.ok?r.json():null).then(d=>{
+            const label = d && (d.city || d.locality || d.principalSubdivision);
+            if(label) try{ localStorage.setItem('sbnm_city_v1', JSON.stringify({display:label})); }catch(_){}
+            if(label && !rib.hidden) citySpan.textContent = label;
+          }).catch(()=>{});
+
+        // Get snowfall (cm) for next 48h
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=snowfall&forecast_days=2&timezone=auto`;
+        const data = await fetch(url, {headers:{'Accept':'application/json'}}).then(r=>r.json());
+        const hours = (data && data.hourly && data.hourly.snowfall) || [];
+        const total = hours.slice(0, 48).reduce((s,v)=> s + (Number(v)||0), 0); // cm
+        if (total >= 8) show();
+      }catch(_){}
+    })();
+
+    // Sticky mobile CTA after 60% scroll
+    (function stickyCTA(){
+      const barId = 'sticky-cta-amz';
+      if (document.getElementById(barId)) return;
+      const bar = document.createElement('div');
+      bar.id = barId;
+      bar.className = 'sticky-cta';
+      bar.hidden = true;
+      bar.innerHTML = `<a id="cta-amz" class="btn btn--primary" rel="sponsored nofollow noopener" target="_blank">See today’s price on Amazon →</a>`;
+      document.body.appendChild(bar);
+      const btn = bar.querySelector('#cta-amz');
+      btn.href = amazonSearchUrl('snow blower');
+
+      let shown = false;
+      window.addEventListener('scroll', ()=>{
+        const progress = (scrollY + innerHeight) / document.documentElement.scrollHeight;
+        if (!shown && progress >= 0.6){ bar.hidden = false; shown = true; }
+      });
+    })();
+  </script>
+
+  <!-- Skimlinks to monetize non-Amazon links only -->
+  <script src="https://s.skimresources.com/js/292387X1779525.skimlinks.js" async></script>
 </body>
 </html>
